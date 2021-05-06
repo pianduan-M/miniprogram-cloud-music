@@ -1,0 +1,37 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/user/index",
+    "pages/search/index",
+    "pages/login/index",
+    "pages/playlist_detail/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f64649",
+    "navigationBarTitleText": "网易云音乐",
+    "navigationBarTextStyle": "white"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "919191",
+    "selectedColor": "#f64649",
+    "backgroundColor": "#FFF",
+    "custom": true,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现",
+        "iconPath": "assets/icon/faxian.png",
+        "selectedIconPath": "assets/icon/faxian-s.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "iconPath": "assets/icon/wode.png",
+        "selectedIconPath": "assets/icon/wode-s.png"
+      }
+    ]
+  }
+}

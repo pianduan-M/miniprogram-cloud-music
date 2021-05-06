@@ -1,0 +1,251 @@
+.user_container {
+  height: 100%;
+  padding: 30rpx;
+  background-color: #f6f6f6;
+  padding-bottom: 150rpx;
+
+  // 用户信息样式
+  .user_info {
+    padding: 20rpx 0;
+    display: flex;
+    align-items: center;
+
+    .user_avatar {
+      width: 100rpx;
+      height: 100rpx;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      margin-right: 20rpx;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .user_name {
+      flex: 5;
+      display: flex;
+      align-items: center;
+
+      &.between {
+        justify-content: space-between;
+
+      }
+
+      text {
+        font-size: 32rpx;
+        font-weight: 400;
+        color: rgb(0, 0, 0);
+
+      }
+    }
+  }
+
+  // 喜欢的音乐
+  .like_music {
+    padding: 30rpx;
+    margin: 20rpx 0;
+    border-radius: 20rpx;
+    background-color: #fff;
+
+    .like_music_container {
+      display: flex;
+      align-items: center;
+
+      .like_music_pic {
+        width: 90rpx;
+        height: 90rpx;
+        background-color: #919191;
+        border-radius: 15rpx;
+        flex-shrink: 0;
+        margin-right: 20rpx;
+        position: relative;
+        overflow: hidden;
+        border: 1rpx solid #f8f8f8;
+
+        .iconfont {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          color: #fff;
+          font-size: 50rpx;
+        }
+      }
+
+      .like_music_text {
+        letter-spacing: 2rpx;
+        font-size: 30rpx;
+        font-weight: 400;
+        color: rgb(39, 39, 39);
+        flex: 3;
+
+        .num {
+          font-size: 20rpx;
+          color: #919191;
+          font-weight: 300;
+          display: flex;
+          align-items: center;
+
+          .iconfont {
+            font-size: 20rpx;
+            color: skyblue;
+            margin-right: 10rpx;
+          }
+        }
+      }
+
+      .like_music_icon {
+        font-size: 24rpx;
+        font-weight: 300;
+        padding: 6rpx 10rpx;
+        border: 1px solid rgba(0, 0, 0, .2);
+        border-radius: 54rpx;
+      }
+    }
+  }
+
+  // 歌单
+  .playlist {
+    .playlist_tab {
+      padding-top: 30rpx;
+      padding-bottom: 10rpx;
+      display: flex;
+      justify-content: center;
+
+      // 歌单 tab栏
+      .tab_item {
+        position: relative;
+        width: 100%;
+        text-align: center;
+
+        &:first-child::after {
+          content: '';
+          position: absolute;
+          right: 0;
+          top: 50%;
+          width: 1px;
+          height: 50%;
+          background-color: #919191;
+          transform: translateY(-50%) scaleX(0.5);
+
+        }
+
+        text {
+          position: relative;
+          z-index: 1;
+        }
+
+        &.active text::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          z-index: -1;
+          width: 100%;
+          height: 12rpx;
+          background: linear-gradient(to right, #f64649, #ff6063);
+          border-radius: 12rpx;
+          transform: scaleX(1.1);
+        }
+      }
+    }
+
+    // 歌单内容
+    .playlist_content {
+      background-color: #f6f6f6;
+
+      // 歌单列表
+      .created_playlist {
+        border-radius: 20rpx;
+        background-color: #fff;
+        padding: 20rpx;
+        margin-top: 20rpx;
+
+        // 列表标题
+        .created_playlist_title {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          color: #919191;
+
+          .name {
+            font-size: 24rpx;
+            font-weight: 300;
+          }
+
+          .tools {
+
+            .iconfont.icon-jia {
+              margin: 0 20rpx;
+            }
+
+            .iconfont {
+              font-size: 36rpx;
+            }
+
+          }
+        }
+
+        // 列表容器
+        .created_playlist_content {
+
+          // 当没有登入时 文字默认样式
+          .default {
+            text-align: center;
+            padding: 20rpx;
+            font-size: 26rpx;
+            color: #919191;
+          }
+
+          // 列表项
+          .playlist_item {
+            padding-top: 20rpx;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            // 图片
+            .playlist_item_pic {
+              position: relative;
+              width: 90rpx;
+              height: 90rpx;
+              border-radius: 15rpx;
+              background-color: #f8f8f8;
+              overflow: hidden;
+              flex-shrink: 0;
+              margin-right: 20rpx;
+              border: 1rpx solid #f8f8f8;
+
+
+              .iconfont {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+              }
+            }
+
+            // 中间文字
+            .playlist_item_text {
+              width: 100%;
+              letter-spacing: 2rpx;
+              font-size: 26rpx;
+              font-weight: 400;
+              color: rgb(39, 39, 39);
+
+              .num {
+                font-size: 20rpx;
+                color: #919191;
+                font-weight: 300;
+              }
+            }
+
+            // 右侧菜单icon
+            .playlist_item_tool {
+              color: #919191;
+            }
+          }
+        }
+      }
+    }
+  }
+}

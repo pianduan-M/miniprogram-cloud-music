@@ -1,0 +1,55 @@
+<view class="login_container">
+  <!-- 标题 -->
+  <view class="login_title">
+    <text>登录体验更精彩</text>
+    <view>{{type==='id' ? '' : '未注册手机号码登录后将自动创建账号'}}</view>
+  </view>
+  <!-- 切换手机/邮箱登录 -->
+  <view class="login_tab" bindtap="handleLoginType">
+    <view class="tab_item {{type==='id'? 'active' :'' }}">
+      <text id="id">账号登录</text>
+    </view>
+    <view class="tab_item  {{type==='phone'? 'active' :'' }} ">
+      <text id="phone">验证码登录</text>
+    </view>
+  </view>
+  <!-- 表单项 -->
+  <view class="login_form">
+    <block class="login_id" wx:if="{{type === 'id'}}">
+      <view class="login_row">
+        <view class="label">手机/邮箱:</view>
+        <view class="form_input">
+          <input type="text" bindblur="handleFormRoles" bindinput="changInput" value="{{user.value}}" id="user" placeholder="输入手机号码" focus placeholder-style="font-size: 24rpx" />
+          <view class="roles">{{user.roleText}}</view>
+        </view>
+      </view>
+      <view class="login_row">
+        <view class="label">密码:</view>
+        <view class="form_input">
+          <input type="password" bindblur="handleFormRoles" bindinput="changInput" id="password" value="{{passoword.value}}" placeholder="输入手机号码" placeholder-style="font-size: 24rpx" />
+          <view class="roles">{{password.roleText}}</view>
+        </view>
+      </view>
+    </block>
+    <block class="login_phone" wx:else>
+      <view class="login_row">
+        <view class="label">手机号码:</view>
+        <view class="form_input">
+          <input type="text" bindblur="handleFormRoles" bindinput="changInput" id="user" value="{{user.value}}" placeholder="输入手机号码" focus placeholder-style="font-size: 24rpx" />
+          <view class="roles">{{user.roleText}}</view>
+        </view>
+      </view>
+      <view class="login_row">
+        <view class="label">验证码:</view>
+        <view class="form_input">
+          <input type="text" bindblur="handleFormRoles" bindinput="changInput" id="password" value="{{passoword.value}}" placeholder="输入验证码" placeholder-style="font-size: 24rpx" />
+          <view class="roles">{{password.roleText}}</view>
+          <button disabled="{{isDisable}}" bindtap="sendAuth">
+            {{isDisable ? timer : "获取验证码"}}
+          </button>
+        </view>
+      </view>
+    </block>
+    <button class="submit" bindtap="login">登录</button>
+  </view>
+</view>

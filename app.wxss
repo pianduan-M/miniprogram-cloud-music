@@ -1,0 +1,26 @@
+/* 主题色 */
+page {
+  --themeColor: #d43c33
+}
+
+/* 重置标签默认 */
+image {
+  width: 100%;
+}
+page,
+button,
+view,
+swiper,
+swiper-item
+{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+.paadding30Rpx {
+  padding: 30rpx;
+}
+
+
+/* 引入iconfont 图标 */
+@import './assets//style/icofont.wxss'
