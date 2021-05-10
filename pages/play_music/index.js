@@ -17,6 +17,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    songId: '',
     // 当前播放歌曲信息
     currentSong: {},
     // 当前播放列表索引
@@ -62,15 +63,13 @@ Page({
       })
       // 如果当前是暂停状态
       if (!isMusicPlay) {
-        const { duration, currentTime } = appInst.globalData
+        const { duration, currentTime, url } = appInst.globalData
         this.setData({
           duration,
           currentTime
         })
         // 设置进度条
         this.setProgress(currentTime, duration)
-        this.BackgroundAudioManager.src = url
-        this.BackgroundAudioManager.title = currentSong.name
       }
 
     } else {
@@ -80,6 +79,7 @@ Page({
       this.setData({
         playlist,
         playMode,
+        songId,
         isPlay: isMusicPlay
       })
       // 设置音乐链接
@@ -319,9 +319,7 @@ Page({
     }
 
     if (e.type == 'touchend') {
-      this.BackgroundAudioManager.pause()
       this.BackgroundAudioManager.seek(currentTime)
-      this.BackgroundAudioManager.play()
       // 开启自动进度条
       this.setData({
         isMove: false
