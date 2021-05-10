@@ -1,0 +1,195 @@
+view.playlist_detail {
+  position: relative;
+  height: 100%;
+
+  // 头部歌单信息区
+  view.playlist_detail_info {
+    position: relative;
+    display: flex;
+    height: 400rpx;
+    align-items: center;
+    padding: 30rpx;
+
+    // 信息区背景
+    .info_bg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      filter: blur(60rpx);
+      width: 100%;
+      height: 100%;
+      transform: scale(1.5);
+      .img {
+        width: 100%;
+        height: 80%;
+      }
+      .mask {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+    // 标题
+    .date_wrap {
+      position: absolute;
+      bottom: 0;
+      left: 30rpx;
+      color: #fff;
+      font-weight: 700;
+      .date {
+        display: flex;
+        align-items: flex-end;
+        .month {
+          font-size: 60rpx;
+          transform: translateY(13%);
+          // letter-spacing: -5rpx;
+          // margin-left: -5rpx;
+        }
+        .line {
+          font-weight: 300;
+          margin-left: 16rpx;
+          margin-right: 8rpx;
+        }
+      }
+
+      .text {
+        font-weight: 400;
+        font-size: 24rpx;
+        display: flex;
+        align-items: center;
+        .iconfont {
+          font-size: 26rpx;
+          margin-left: 5rpx;
+        }
+      }
+    }
+
+  }
+
+  // 歌曲列表区
+  .playlist_content {
+    position: relative;
+    padding: 60rpx 0;
+
+    // 头部功能区
+    .playlist_content_head {
+      display: flex;
+
+      .head_left {
+        width: 80rpx;
+        flex-shrink: 0;
+        text-align: center;
+
+        .iconfont {
+          color: var(--themeColor);
+        }
+      }
+
+      .head_center {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .num {
+          font-size: 24rpx;
+          color: #919191;
+          margin-left: 10rpx;
+        }
+
+        .icon {
+          width: 50rpx;
+          flex-shrink: 0;
+          text-align: center;
+          transform: scale(1.2);
+        }
+      }
+
+      .head_right {
+        width: 80rpx;
+        flex-shrink: 0;
+        text-align: center;
+      }
+    }
+
+    // 列表容器
+    .playlist_content_list {
+      padding-top: 20rpx;
+
+      // 列表项
+      .list_item {
+        padding: 10rpx 0;
+        display: flex;
+        align-items: center;
+
+        // 左侧序列
+        .num {
+          width: 80rpx;
+          flex-shrink: 0;
+          text-align: center;
+          color: #919191;
+
+          .iconfont {
+            color: var(--themeColor);
+          }
+        }
+
+        // 中间歌曲信息
+        .song_info {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          overflow: hidden;
+
+          .song_name_wrap {
+            width: 100%;
+            overflow: hidden;
+
+            .song_name {
+              width: 100%;
+
+              font-size: 28rpx;
+              color: rgba(0, 0, 0, 0.8);
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+
+            .singer {
+              display: block;
+              width: 100%;
+              font-weight: 300;
+              font-size: 24rpx;
+              color: #919191;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+
+          }
+
+          .icon {
+            width: 50rpx;
+            flex-shrink: 0;
+            text-align: center;
+            transform: scale(1.1);
+            color: #919191;
+          }
+
+        }
+
+        // 右侧菜单btn
+        .item_menu {
+          flex-shrink: 0;
+          width: 80rpx;
+          flex-shrink: 0;
+          text-align: center;
+        }
+      }
+    }
+  }
+}

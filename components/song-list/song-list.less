@@ -1,0 +1,96 @@
+// 播放列表
+.song_list_container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  padding: 0 30rpx;
+  overflow: hidden;
+  z-index: 999;
+  // 遮罩层
+  .list_mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .song_list_wrap {
+    position: absolute;
+    left: 30rpx;
+    bottom: 0;
+    width: calc(100% - 60rpx);
+    height: 60vh;
+    background-color: #fff;
+    border-radius: 30rpx;
+    padding: 20rpx;
+  }
+
+  .song_list_head {
+    width: 100%;
+    font-size: 36rpx;
+    padding-bottom: 30rpx;
+    position: relative;
+
+    .num {
+      font-size: 26rpx;
+      color: #919191;
+      margin-left: 10rpx;
+    }
+
+  }
+
+  .song_list_content {
+    width: 100%;
+    height: calc(60vh - 42rpx - 30rpx);
+    overflow: hidden;
+
+    .song_list_item {
+      display: flex;
+      justify-content: space-between;
+      padding: 20rpx 0;
+
+      .song_name_wrap {
+        display: flex;
+        align-items: center;
+        width: 90%;
+
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        .isCurrent {
+          color: var(--themeColor) !important;
+        }
+
+        .song_name {
+          font-size: 30rpx;
+          color: rgba(0, 0, 0, .8);
+        }
+
+        text {
+          font-size: 24rpx;
+          color: #919191;
+          margin: 0 10rpx;
+        }
+
+        .singer {
+          font-size: 24rpx;
+          color: #919191;
+        }
+      }
+
+      .song_icon {
+        width: 50rpx;
+        height: 50rpx;
+        flex-shrink: 0;
+
+        .iconfont {
+          color: #919191;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,258 @@
+.search_result {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+
+
+  // 头部 表单区
+  .search_head {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30rpx;
+    padding-bottom: 10rpx;
+
+    .search_wrap {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 4;
+
+      input {
+        flex: 4;
+        padding: 10rpx 70rpx;
+        border-radius: 50rpx;
+        background-color: #f8f8f8;
+      }
+
+      .input_plac {
+        color: #c7c7c7;
+        font-weight: 400;
+        font-size: 26rpx;
+      }
+
+      icon {
+        position: absolute;
+        margin: 0 15rpx;
+      }
+
+      .clear_icon {
+        right: 0;
+      }
+    }
+
+    .search_btn {
+      width: 80rpx;
+      text-align: right;
+      flex-shrink: 0;
+      float: right;
+    }
+
+  }
+  // 顶部导航栏
+  .nav_container {
+    position: relative;
+
+    .navScroll {
+      width: 100vw;
+      height: 60rpx;
+      margin-top: 20rpx;
+      display: flex;
+      position: relative;
+
+      .navItem {
+        flex-shrink: 0;
+        padding: 10rpx 20rpx;
+      }
+
+
+    }
+
+    .active {
+      width: 80rpx;
+      height: 10rpx;
+      background-color: red;
+      position: absolute;
+      left: 0;
+      top: 38rpx;
+      border-radius: 20rpx;
+      margin-left: 8rpx;
+      z-index: -1;
+      transition: 0.4s transform;
+    }
+  }
+
+  // 歌曲列表区
+  .result_content {
+    height: calc(100vh - 60rpx);
+    position: relative;
+    padding: 30rpx 0;
+
+    // 头部功能区
+    .result_content_head {
+      display: flex;
+
+      .head_left {
+        width: 80rpx;
+        flex-shrink: 0;
+        text-align: center;
+
+        .iconfont {
+          color: var(--themeColor);
+        }
+      }
+
+      .head_center {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        .num {
+          font-size: 24rpx;
+          color: #919191;
+          margin-left: 10rpx;
+        }
+
+        .icon {
+          width: 50rpx;
+          flex-shrink: 0;
+          text-align: center;
+          transform: scale(1.2);
+        }
+      }
+
+      .head_right {
+        width: 80rpx;
+        flex-shrink: 0;
+        text-align: center;
+      }
+    }
+
+    // 列表容器
+    .result_content_list {
+      padding-top: 20rpx;
+
+      // 列表项
+      .list_item {
+        padding: 10rpx 0rpx 10rpx 30rpx;
+        ;
+        display: flex;
+        align-items: center;
+
+        // 左侧序列
+        .num {
+          width: 80rpx;
+          flex-shrink: 0;
+          text-align: center;
+          color: #919191;
+
+          .iconfont {
+            color: var(--themeColor);
+          }
+        }
+
+        // 中间歌曲信息
+        .song_info {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          overflow: hidden;
+
+          .song_name_wrap {
+            width: 100%;
+            overflow: hidden;
+
+            .song_name {
+              width: 100%;
+
+              font-size: 28rpx;
+              color: rgba(0, 0, 0, 0.8);
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+
+            .singer {
+              display: block;
+              width: 100%;
+              font-weight: 300;
+              font-size: 24rpx;
+              color: #919191;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+
+          }
+
+          .icon {
+            width: 50rpx;
+            flex-shrink: 0;
+            text-align: center;
+            transform: scale(1.1);
+            color: #919191;
+          }
+
+        }
+
+        // 右侧菜单btn
+        .item_menu {
+          flex-shrink: 0;
+          width: 80rpx;
+          flex-shrink: 0;
+          text-align: center;
+        }
+      }
+    }
+  }
+  // 搜索建议
+  .search_suggest {
+    position: absolute;
+    left: 0;
+    top: 90rpx;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    color: #3a3a3a;
+    z-index: 999;
+
+    .search_suggest_wrap {
+      padding-top: 10rpx;
+
+      .suggest_item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 15rpx;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 50rpx;
+          right: 0;
+          bottom: 0;
+          height: 1rpx;
+          transform: scaleY(0.5);
+          background-color: #f1f1f1;
+        }
+
+        icon {
+          width: 50rpx;
+          flex-shrink: 0;
+        }
+
+        .item_value {
+          position: relative;
+          width: 100%;
+
+        }
+      }
+    }
+  }
+}

@@ -1,31 +1,204 @@
+@font-face {
+  font-family: "iconfont";
+  /* Project id 2527519 */
+  src: url('//at.alicdn.com/t/font_2527519_b4k8uvx8piu.woff2?t=1620494232412') format('woff2'), url('//at.alicdn.com/t/font_2527519_b4k8uvx8piu.woff?t=1620494232412') format('woff'), url('//at.alicdn.com/t/font_2527519_b4k8uvx8piu.ttf?t=1620494232412') format('truetype');
+}
+/* 
+ */
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-back:before {
+  content: "\e618";
+}
+.icon-one:before {
+  content: "\e63c";
+}
+.icon-guanbi:before {
+  content: "\e600";
+}
+.icon-zanting:before {
+  content: "\e603";
+}
+.icon-bofang1:before {
+  content: "\e645";
+}
+.icon-shangyishou:before {
+  content: "\e61e";
+}
+.icon-bofangliebiao:before {
+  content: "\e616";
+}
+.icon-random:before {
+  content: "\e669";
+}
+.icon-list:before {
+  content: "\e61f";
+}
+.icon-changge:before {
+  content: "\e895";
+}
+.icon-aixin:before {
+  content: "\e623";
+}
+.icon-play1:before {
+  content: "\e6c8";
+}
+.icon-select:before {
+  content: "\e723";
+}
+.icon-xiazai:before {
+  content: "\e856";
+}
+.icon-success:before {
+  content: "\e677";
+}
+.icon-share:before {
+  content: "\e6fb";
+}
+.icon-comment-:before {
+  content: "\e630";
+}
+.icon-successcircle:before {
+  content: "\e602";
+}
+.icon-daoru:before {
+  content: "\e63d";
+}
+.icon-diandiandianshu:before {
+  content: "\e679";
+}
+.icon-jia:before {
+  content: "\e715";
+}
+.icon-huaban:before {
+  content: "\e60d";
+}
+.icon-bofang:before {
+  content: "\e626";
+}
+.icon-xin:before {
+  content: "\e705";
+}
+.icon-play:before {
+  content: "\e6a7";
+}
+.icon-rightarrow:before {
+  content: "\e622";
+}
 .tab-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 150rpx;
   background: white;
   display: flex;
   flex-direction: column;
   padding-bottom: env(safe-area-inset-bottom);
 }
+.tab-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: scaleY(0.5);
+  background-color: #e8e8e8;
+}
 .tab-bar-tools {
   width: 100%;
-  height: 50rpx;
+  height: 80rpx;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  background-color: #f9f9f9;
 }
-.tab-bar-tools view {
-  width: 30rpx;
-  height: 30rpx;
-  background-color: pink;
+.tab-bar-tools .tabbar_song_cover {
+  flex: 1;
+  flex-shrink: 0;
+  position: relative;
 }
-audio {
+.tab-bar-tools .tabbar_song_cover .song_cover_wrap {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0;
+  left: 30rpx;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.tab-bar-tools .tabbar_song_cover .song_cover_wrap .cover {
+  width: 70%;
+  height: 70%;
+  vertical-align: middle;
+  border-radius: 50%;
+}
+.tab-bar-tools .tabbar_song_name {
+  flex: 4;
   height: 100%;
+  display: flex;
   width: 100%;
+  margin-left: 20rpx;
+  align-items: center;
+  overflow: hidden;
+}
+.tab-bar-tools .tabbar_song_name .song_name_wrap {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.tab-bar-tools .tabbar_song_name .song_name_wrap .song_name {
+  width: 70%;
+  font-size: 30rpx;
+  color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.tab-bar-tools .tabbar_song_name .song_name_wrap .line {
+  margin: 0 10rpx;
+  color: #919191;
+  font-size: 26rpx;
+  font-weight: 300;
+}
+.tab-bar-tools .tabbar_song_name .song_name_wrap .singer {
+  font-size: 26rpx;
+  color: #919191;
+  font-weight: 300;
+}
+.tab-bar-tools .tabbar_song_icon {
+  flex: 1;
+  flex-shrink: 0;
+  font-size: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 30rpx;
+  text-align: center;
+}
+.tab-bar-tools .tabbar_song_icon .paly_btn {
+  margin-left: 20rpx;
+}
+.tab-bar-tools .tabbar_song_icon .paly_btn .iconfont {
+  font-size: 36rpx;
+}
+.tab-bar-tools .tabbar_song_icon .iconfont {
+  font-size: 30rpx;
 }
 .tab-bar-content {
+  position: relative;
   display: flex;
+  align-items: center;
+  padding: 10rpx 0;
 }
 .tab-bar-item {
   flex: 1;
@@ -35,13 +208,11 @@ audio {
   align-items: center;
   flex-direction: column;
 }
-
-.tab-bar-item cover-image {
+.tab-bar-item .cover-image {
   width: 50rpx;
   height: 50rpx;
 }
-
-.tab-bar-item cover-view {
+.tab-bar-item .tab-bar-title {
   margin-top: 10rpx;
   font-size: 25rpx;
 }

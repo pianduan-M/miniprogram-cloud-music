@@ -1,2 +1,69 @@
-<!--pages/search/index.wxml-->
-<text>pages/search/index.wxml</text>
+<view class="search">
+  <!-- 头部搜索框 -->
+  <view class="search_head">
+    <view class="search_wrap">
+      <!-- input -->
+      <input focus="{{true}}" value="{{SearchValue}}" bindinput="handleSearch" type="text" placeholder="{{defaultSearch}}" placeholder-class="input_plac" />
+      <!-- icon -->
+      <icon class="search_icon" type="search" size="23" color=""></icon>
+      <icon class="clear_icon" type="clear" size="18" data-type="input" hidden="{{!SearchValue}}" catchtap="cleartHistory"></icon>
+    </view>
+    <!-- 按钮 -->
+    <view class="search_btn" data-type="btn" bindtap="search">搜索</view>
+  </view>
+  <!-- 内容区 -->
+  <view class="search_container">
+    <scroll-view class="search_content">
+      <!-- 历史搜索 -->
+      <view class="search_his" wx:if="{{historySearch.length >0}}">
+        <!-- 容器 -->
+        <view class="search_his_wrap">
+          <!-- 左侧标题 -->
+          <view class="his_title">历史</view>
+          <!-- item 项 -->
+          <scroll-view class="his_item_content" scroll-x="{{true}}" enable-flex>
+            <view class="his_item" wx:key="index" data-type="list" data-value="{{item}}" bindtap="search" wx:for="{{historySearch}}">
+              {{item}}
+            </view>
+          </scroll-view>
+          <!-- 清空按钮 -->
+          <view class="his_delete" data-type="history" bindtap="cleartHistory">
+            <text class="iconfont icon-lajixiang"></text>
+          </view>
+        </view>
+      </view>
+      <!-- 热搜 -->
+      <view class="hot_search">
+        <!-- 容器 -->
+        <view class="hot_search_wrap">
+          <!-- 头部标题区 -->
+          <view class="hot_head">
+            <view class="title">热搜榜</view>
+            <view class="play_icon">
+              <text>播放</text>
+            </view>
+          </view>
+          <!-- 列表内容区 -->
+          <view class="hot_contnet">
+            <view class="hot_item_wrap" wx:for="{{hotSearch}}" wx:key="index" data-type="list" data-value="{{item.searchWord}}" bindtap="search">
+              <view class="num" style="color:{{index < 3 ? 'red':''}}">{{index+1}}</view>
+              <view class="name">{{item.searchWord}}</view>
+              <view class="icon" wx:if="{{item.iconUrl}}">
+                <image src="{{item.iconUrl}}" mode="aspectFit"></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 搜索建议列表 -->
+  <scroll-view class="search_result" wx:if="{{suggest.length > 0}}">
+    <view class="search_result_wrap">
+      <view class="result_item" wx:for="{{suggest}}" data-type="list" data-value="{{item.keyword}}" bindtap="search">
+        <icon type="search" size="23" color=""></icon>
+        <view class="item_value">{{item.keyword}}</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

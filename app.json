@@ -1,24 +1,29 @@
 {
   "pages": [
+    "pages/recommend_songs/index",
+    "pages/search/index",
     "pages/index/index",
     "pages/user/index",
-    "pages/search/index",
     "pages/login/index",
-    "pages/playlist_detail/index"
+    "pages/playlist_detail/index",
+    "pages/play_music/index",
+    "pages/search_result/index"
   ],
+  "requiredBackgroundModes": ["audio"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f64649",
     "navigationBarTitleText": "网易云音乐",
     "navigationBarTextStyle": "white"
   },
+  
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "tabBar": {
+    "custom": true,
     "color": "919191",
     "selectedColor": "#f64649",
     "backgroundColor": "#FFF",
-    "custom": true,
     "list": [
       {
         "pagePath": "pages/index/index",

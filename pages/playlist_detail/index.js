@@ -1,66 +1,45 @@
 // pages/playlist_detail/index.js
+import request from '../../request/index'
+var appInst = getApp();
+
+
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    playlist: {}
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    console.log(options);
+  onLoad(options) {
+    const { id, type } = options
+    if (type && type === 'recommend') {
+      this.getRecommendPlaylist()
+    } else {
+      this.getPlaylistDetail(id)
+    }
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  // 获取歌单详情
+  async getPlaylistDetail(id) {
+    const res = await request({ url: '/playlist/detail', data: { id } })
+    const playlist = res.data.playlist
+    this.setData({
+      playlist
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  async getRecommendPlaylist() {
+    const res = await request({ url: '/recommend/songs' })
+    const playlist = res.data.data.dailySongs
+    this.setData({
+      playlist
+    })
   },
+  // 跳转播放
+  toPlay(e) {
+    // 获取当前歌曲id
+    const { id } = e.currentTarget.dataset
+    //  保存歌单到全局变量
+    appInst.globalData.playlist = this.data.playlist.tracks
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    // 跳转到播放页面
+    wx.navigateTo({
+      url: '/pages/play_music/index?id=' + id
+    });
   }
 })

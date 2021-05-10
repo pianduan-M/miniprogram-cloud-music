@@ -1,15 +1,37 @@
-<!--miniprogram/custom-tab-bar/index.wxml-->
+<!-- miniprogram/custom-tab-bar/index.wxml -->
 <view class="tab-bar">
-  <view class="tab-bar-tools">
-    <view bindtap="handlePlay"></view>
-    <view></view>
-    <view></view>
-  </view>
+  <navigator class="tab-bar-tools" url="/pages/play_music/index" hover-class="none" open-type="navigate" wx:if="{{currentSong.name}}">
+    <!-- 封面 -->
+    <view class="tabbar_song_cover">
+      <div class="song_cover_wrap">
+        <image  class="cover" src="{{currentSong.al.picUrl}}" mode="widthFix"></image>
+      </div>
+    </view>
+    <!-- 音乐信息 -->
+    <view class="tabbar_song_name">
+      <view class="song_name_wrap">
+        <text class="song_name">{{currentSong.name}}</text>
+        <text class="line">-</text>
+        <text class="singer">{{currentSong.ar[0].name}}</text>
+      </view>
+    </view>
+    <view class="tabbar_song_icon">
+      <!-- 播放按钮 -->
+      <text class="paly_btn" catchtap="switchPlay" >
+        <text class="iconfont icon-{{isMusicPlay?'zanting':'bofang1'}}" ></text>
+      </text>
+      <!-- 列表按钮 -->
+      <view class="play_menu" catchtap="showSongList">
+        <text class="iconfont icon-bofangliebiao"></text>
+      </view>
+    </view>
+  </navigator>
   <view class="tab-bar-content">
-    <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}"
-      data-index="{{index}}" bindtap="switchTab">
-      <cover-image src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
-      <cover-view class="tab-bar-title" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</cover-view>
+    <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+      <cover-image class="cover-image"  src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
+      <cover-view class="tab-bar-title" style="color: {{selected === index ? selectedColor : color}}">
+        {{item.text}}
+      </cover-view>
     </cover-view>
   </view>
 </view>

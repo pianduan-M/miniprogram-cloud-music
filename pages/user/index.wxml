@@ -1,122 +1,137 @@
-<view class="user_container">
-  <!-- 用户信息 -->
-  <view class="user_info" bindtap="login">
-    <!-- 用户头像 -->
-    <navigator hover-class="none" class="user_avatar">
-      <image src="{{userInfo.avatarUrl ? userInfo.avatarUrl : '../../assets/images/user_avatar_default.png'}}" mode="widthFix"></image>
-    </navigator>
-    <!-- 用户昵称 -->
-    <navigator hover-class="none" class="user_name {{userInfo.nickname?'between': '' }}">
-      <text>{{userInfo.nickname ? userInfo.nickname : '立即登录'}}</text>
-      <text class="iconfont icon-rightarrow"></text>
-    </navigator>
+<!-- 固定定位的tab -->
+<view class="playlist_tab fixed" style="display:{{scrollTop>200?'':'none'}}" id="playlist_tab" bindtap="choosePlaylist">
+  <view class="tab_item {{playlistType==='created'?'active':''}}">
+    <text id="created_btn">创建歌单</text>
   </view>
-  <!-- 我喜欢的音乐 -->
-  <view class="like_music">
-    <navigator hover-class="none" class="like_music_container" url="/pages/playlist_detail/index?id={{playlist.like.id}}">
-      <!-- 图片 -->
-      <view class="like_music_pic">
-        <image wx:if="{{playlist.like.coverImgUrl}}" src="{{playlist.like.coverImgUrl}}" mode="widthFix"></image>
-        <text class="iconfont icon-xin"></text>
-      </view>
-      <!-- 文本 -->
-      <view class="like_music_text">
-        <view>我喜欢的音乐</view>
-        <view class="num">
-          <text class="iconfont icon-successcircle"></text>
-          <text>{{playlist.like.trackCount?playlist.like.trackCount:"0"}}首</text>
-        </view>
-      </view>
-      <!-- icon -->
-      <view class="like_music_icon">
-        <text class="iconfont icon-huaban"></text>
-        <text>心动模式</text>
-      </view>
-    </navigator>
+  <view class="tab_item {{playlistType==='collect'?'active':''}}">
+    <text id="collect_btn">收藏歌单</text>
   </view>
-  <!-- 歌单 -->
-  <view class="playlist">
-    <!-- 工具tab栏 -->
-    <view class="playlist_tab" id="playlist_tab" bindtap="choosePlaylist">
-      <view class="tab_item active">
-        <text>创建歌单</text>
-      </view>
-      <view class="tab_item">
-        <text>收藏歌单</text>
-      </view>
+</view>
+<scroll-view class="user_container" id="user_container" scroll-into-view="{{view}}" enhanced scroll-y bindscroll="handleScroll">
+  <view class="user_wrap">
+    <!-- 用户信息 -->
+    <view class="user_info" bindtap="login">
+      <!-- 用户头像 -->
+      <navigator hover-class="none" class="user_avatar">
+        <image src="{{userInfo.avatarUrl ? userInfo.avatarUrl : '../../assets/images/user_avatar_default.png'}}" mode="widthFix"></image>
+      </navigator>
+      <!-- 用户昵称 -->
+      <navigator hover-class="none" class="user_name {{userInfo.nickname?'between': '' }}">
+        <text>{{userInfo.nickname ? userInfo.nickname : '立即登录'}}</text>
+        <text class="iconfont icon-rightarrow"></text>
+      </navigator>
     </view>
-    <view class="playlist_content">
-      <!-- 创建的歌单 -->
-      <view class="created_playlist" id="playlist_created">
-        <!-- 标题 -->
-        <view class="created_playlist_title">
-          <view class="name">创建歌单</view>
-          <view class="tools">
-            <text class="iconfont icon-jia"></text>
-            <text class="iconfont icon-diandiandianshu"></text>
+    <!-- 我喜欢的音乐 -->
+    <view class="like_music">
+      <navigator hover-class="none" class="like_music_container" url="/pages/playlist_detail/index?id={{playlist.like.id}}">
+        <!-- 图片 -->
+        <view class="like_music_pic">
+          <image wx:if="{{playlist.like.coverImgUrl}}" src="{{playlist.like.coverImgUrl}}" mode="widthFix"></image>
+          <text class="iconfont icon-xin"></text>
+        </view>
+        <!-- 文本 -->
+        <view class="like_music_text">
+          <view>我喜欢的音乐</view>
+          <view class="num">
+            <text class="iconfont icon-successcircle"></text>
+            <text>{{playlist.like.trackCount?playlist.like.trackCount:"0"}}首</text>
           </view>
         </view>
-        <!-- 歌单列表项 -->
-        <view class="created_playlist_content">
-          <block  wx:if="{{!playlist.created.length > 0}}">
-            <view class="playlist_item">
-              <view class="playlist_item_pic">
-                <image ></image>
-                <text class="iconfont icon-daoru"></text>
-              </view>
-              <view class="playlist_item_text">
-                <view>一键导入外部歌单</view>
-                <view class="num">0首</view>
-              </view>
-              <view class="playlist_item_tool">
-                <text class="iconfont icon-diandiandianshu"></text>
-              </view>
-            </view>
-          </block>
-         <block wx:else>
-            <view class="playlist_item" bindtap="toPlaylistDetail" data-id="{{item.id}}" wx:for="{{playlist.created}}" wx:key="id">
-            <view class="playlist_item_pic">
-              <image src="{{item.coverImgUrl}}" mode="widthFix"></image>
-              <text wx:if="{{!item.coverImgUrl}}" class="iconfont icon-daoru"></text>
-            </view>
-            <view class="playlist_item_text">
-              <view>{{item.name?item.name:'一键导入外部歌单'}}</view>
-              <view class="num">{{item.trackCount+"首"}}</view>
-            </view>
-            <view class="playlist_item_tool" wx:if="{{item.name}}">
+        <!-- icon -->
+        <view class="like_music_icon">
+          <text class="iconfont icon-huaban"></text>
+          <text>心动模式</text>
+        </view>
+      </navigator>
+    </view>
+    <!-- 歌单 -->
+    <view class="playlist">
+      <!-- 工具tab栏 -->
+      <view class="playlist_tab" id="playlist_tab" bindtap="choosePlaylist">
+        <view class="tab_item {{playlistType==='created'?'active':''}}">
+          <text id="created_btn">创建歌单</text>
+        </view>
+        <view class="tab_item {{playlistType==='collect'?'active':''}}">
+          <text id="collect_btn">收藏歌单</text>
+        </view>
+      </view>
+      <view class="playlist_content">
+        <!-- 创建的歌单 -->
+        <view class="created_playlist">
+          <!-- 跳转用的锚点元素 -->
+          <view id="playlist_created"></view>
+          <!-- 标题 -->
+          <view class="created_playlist_title">
+            <view class="name">创建歌单</view>
+            <view class="tools">
+              <text class="iconfont icon-jia"></text>
               <text class="iconfont icon-diandiandianshu"></text>
             </view>
           </view>
-         </block>
-        </view>
-      </view>
-      <!-- 收藏的歌单 -->
-      <view class="created_playlist" id="playlist_collect">
-        <!-- 标题 -->
-        <view class="created_playlist_title">
-          <view class="name">收藏歌单</view>
-          <view class="tools">
-            <text class="iconfont icon-diandiandianshu"></text>
+          <!-- 歌单列表项 -->
+          <view class="created_playlist_content">
+            <block wx:if="{{!playlist.created.length > 0}}">
+              <view class="playlist_item">
+                <view class="playlist_item_pic">
+                  <image></image>
+                  <text class="iconfont icon-daoru"></text>
+                </view>
+                <view class="playlist_item_text">
+                  <view>一键导入外部歌单</view>
+                  <view class="num">0首</view>
+                </view>
+                <view class="playlist_item_tool">
+                  <text class="iconfont icon-diandiandianshu"></text>
+                </view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="playlist_item" bindtap="toPlaylistDetail" data-id="{{item.id}}" wx:for="{{playlist.created}}" wx:key="id">
+                <view class="playlist_item_pic">
+                  <image src="{{item.coverImgUrl}}" mode="widthFix"></image>
+                  <text wx:if="{{!item.coverImgUrl}}" class="iconfont icon-daoru"></text>
+                </view>
+                <view class="playlist_item_text">
+                  <view>{{item.name?item.name:'一键导入外部歌单'}}</view>
+                  <view class="num">{{item.trackCount+"首"}}</view>
+                </view>
+                <view class="playlist_item_tool" wx:if="{{item.name}}">
+                  <text class="iconfont icon-diandiandianshu"></text>
+                </view>
+              </view>
+            </block>
           </view>
         </view>
-        <!-- 歌单列表项 -->
-        <view class="created_playlist_content">
-          <block wx:if="{{!playlist.collect.length > 0}}">
-            <view class="default">暂无收藏的歌单</view>
-          </block>
-          <block wx:else>
-            <view class="playlist_item" bindtap="toPlaylistDetail" data-id="{{item.id}}" wx:for="{{playlist.collect}}" wx:key="id">
-              <view class="playlist_item_pic">
-                <image src="{{item.coverImgUrl}}" mode="widthFix"></image>
-              </view>
-              <view class="playlist_item_text">
-                <view>{{item.name?item.name:'暂无收藏的歌单'}}</view>
-                <view class="num">{{item.trackCount+"首"}}</view>
-              </view>
+        <!-- 收藏的歌单 -->
+        <view class="created_playlist">
+          <!-- 跳转用的锚点元素 -->
+          <view id="playlist_collect"></view>
+          <!-- 标题 -->
+          <view class="created_playlist_title">
+            <view class="name">收藏歌单</view>
+            <view class="tools">
+              <text class="iconfont icon-diandiandianshu"></text>
             </view>
-          </block>
+          </view>
+          <!-- 歌单列表项 -->
+          <view class="created_playlist_content">
+            <block wx:if="{{!playlist.collect.length > 0}}">
+              <view class="default">暂无收藏的歌单</view>
+            </block>
+            <block wx:else>
+              <view class="playlist_item" bindtap="toPlaylistDetail" data-id="{{item.id}}" wx:for="{{playlist.collect}}" wx:key="id">
+                <view class="playlist_item_pic">
+                  <image src="{{item.coverImgUrl}}" mode="widthFix"></image>
+                </view>
+                <view class="playlist_item_text">
+                  <view>{{item.name?item.name:'暂无收藏的歌单'}}</view>
+                  <view class="num">{{item.trackCount+"首"}}</view>
+                </view>
+              </view>
+            </block>
+          </view>
         </view>
       </view>
     </view>
   </view>
-</view>
+</scroll-view>

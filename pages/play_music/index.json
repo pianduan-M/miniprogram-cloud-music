@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "SongList": "../../components/song-list/song-list",
+    "NavBar": "../../components/nav-bar/nav-bar"
+  },
+  "enablePullDownRefresh":false,
+  "navigationStyle": "custom",
+  "disableScroll":true
+}

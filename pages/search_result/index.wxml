@@ -1,0 +1,73 @@
+<view class="search_result">
+  <!-- 头部搜索框 -->
+  <view class="search_head">
+    <view class="search_wrap">
+      <!-- input -->
+      <input value="{{SearchValue}}" bindinput="handleSearch" type="text" placeholder-class="input_plac" />
+      <!-- icon -->
+      <icon class="search_icon" type="search" size="23" color=""></icon>
+      <icon class="clear_icon" type="clear" size="18" hidden="{{!SearchValue}}" catchtap="cleartHistory"></icon>
+    </view>
+    <!-- 按钮 -->
+    <view class="search_btn" data-type="btn" bindtap="search">搜索</view>
+  </view>
+  <view class="nav_container">
+    <scroll-view scroll-x class="navScroll" enable-flex scroll-into-view="{{navId}}" scroll-with-animation show-scrollbar="{{false}}">
+      <view id="{{'scroll' + index}}" class="navItem" wx:for="{{searchGroupList}}" wx:key="id" bindtap="changeNav" data-id="{{index}}">
+        {{item}}
+      </view>
+      <view class="active" style="transform: translateX({{Navleft}}px)"></view>
+    </scroll-view>
+  </view>
+  <!-- 歌单内容区 -->
+  <scroll-view class="result_content" scroll-y>
+    <!-- 歌单内容头部区域 -->
+    <view class="result_content_head">
+      <view class="head_left">
+        <text class="iconfont icon-play1"></text>
+      </view>
+      <view class="head_center">
+        <view class="text">
+          <text>播放全部</text>
+          <text class="num">({{songs.length}})</text>
+        </view>
+        <view class="icon">
+          <text class="iconfont icon-xiazai"></text>
+        </view>
+      </view>
+      <view class="head_right">
+        <text class="iconfont icon-select"></text>
+      </view>
+    </view>
+    <!-- 歌单列表项 -->
+    <view class="result_content_list">
+      <view class="list_item" wx:for="{{songs}}" wx:key="id" bindtap="toPlay" data-id="{{item.id}}">
+        <!-- 序列 -->
+        <!-- <view class="num" style="{{index>=99?'font-size:24rpx':''}}">{{index+1}}</view> -->
+        <!-- 歌曲信息 -->
+        <view class="song_info">
+          <view class="song_name_wrap">
+            <view class="song_name">{{item.name}}</view>
+            <view class="singer">{{item.artists[0].name}}-{{item.album.name}}</view>
+          </view>
+          <view class="icon" wx:if="{{item.mv !== 0}}">
+            <text class="iconfont icon-bofang"></text>
+          </view>
+        </view>
+        <!-- 右侧菜单栏 -->
+        <view class="item_menu">
+          <text class="iconfont icon-diandiandianshu"></text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- 搜索建议列表 -->
+  <scroll-view class="search_suggest" wx:if="{{suggest.length > 0}}">
+    <view class="search_suggest_wrap">
+      <view class="suggest_item" wx:for="{{suggest}}" data-type="list" wx:key="index" data-value="{{item.keyword}}" bindtap="search">
+        <icon type="search" size="23" color=""></icon>
+        <view class="item_value">{{item.keyword}}</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

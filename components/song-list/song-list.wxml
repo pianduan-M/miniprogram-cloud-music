@@ -1,0 +1,23 @@
+<view class="song_list_container">
+  <view class="list_mask" bindtap="onCancel"></view>
+  <view class="song_list_wrap">
+    <!-- 顶部功能栏 -->
+    <view class="song_list_head">
+      <text class="title">当前播放</text>
+      <text class="num">({{playlist.length}})</text>
+    </view>
+    <!-- 歌单列表项 -->
+    <scroll-view class="song_list_content" scroll-y>
+      <view class="song_list_item " wx:for="{{playlist}}" wx:key="id" bindtap="playListSong" data-id="{{item.id}}">
+        <view class="song_name_wrap ">
+          <view class="song_name {{index===currentIndex?'isCurrent':''}}">{{item.name}}</view>
+          <text class="{{index===currentIndex?'isCurrent':''}}">-</text>
+          <view class="singer {{index===currentIndex?'isCurrent':''}}">{{item.ar[0].name}}</view>
+        </view>
+        <view class="song_icon">
+          <text class="iconfont icon-delete"></text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

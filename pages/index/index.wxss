@@ -1,17 +1,19 @@
 .home {
-  height: 100%;
-  padding-top: 90rpx;
-  padding-bottom: 150rpx;
+  height: 100vh;
   background-color: #f6f6f6;
+  overflow: hidden;
+  padding-bottom: 90rpx;
+}
+.home .home_content {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 90rpx);
+  padding-bottom: 150rpx;
 }
 .home .search_wrap {
   width: 100vw;
   padding: 30rpx;
-  position: fixed;
-  top: 0;
-  left: 0;
   background-color: #fff;
-  z-index: 999;
 }
 .home .search_wrap button {
   width: 100%;
@@ -25,13 +27,16 @@
   color: #919191;
 }
 .home .banner {
-  padding-top: 20rpx;
   background-color: #fff;
+  height: 300rpx;
 }
 .home .banner .banner_item {
-  padding: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .home .banner .banner_item image {
+  width: 90%;
   border-radius: 30rpx;
   position: relative;
   vertical-align: middle;
@@ -110,12 +115,14 @@
   color: #616161;
   font-size: 24rpx;
   border: 1px solid #ddd;
-  padding: 0 10rpx 0 20rpx;
+  padding: 0 20rpx;
   border-radius: 30rpx;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(0.8);
+}
+.home .recommend_resource .recommed_title .recommed_title_right .iconfont {
+  font-size: 20rpx;
 }
 .home .recommend_resource .recommend_resource_content {
   height: 300rpx;
@@ -168,12 +175,14 @@
   color: #616161;
   font-size: 24rpx;
   border: 1px solid #ddd;
-  padding: 0 10rpx 0 20rpx;
+  padding: 0 20rpx;
   border-radius: 30rpx;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(0.8);
+}
+.home .hot_top .hot_top_title .hot_title_right .iconfont {
+  font-size: 20rpx;
 }
 .home .hot_top .hot_top_main {
   height: 500rpx;

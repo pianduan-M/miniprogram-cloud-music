@@ -1,5 +1,5 @@
 
-const bese_url = 'http://localhost:5000'
+const bese_url = 'http://192.168.6.58:5000'
 
 export default function request(params) {
 
@@ -17,13 +17,13 @@ export default function request(params) {
       Cookie: CookieSrt
     }
   }
-  if (params.data && Object.keys(params.data).length > 0) {
-    params.data.proxy = 'your-proxy'
-  } else {
-    params.data = {
-      proxy: 'your-proxy'
-    }
-  }
+  // if (params.data && Object.keys(params.data).length > 0) {
+  //   params.data.proxy = 'your-proxy'
+  // } else {
+  //   params.data = {
+  //     proxy: 'your-proxy'
+  //   }
+  // }
   return new Promise((resolve, reject) => {
     wx.request({
       ...params,

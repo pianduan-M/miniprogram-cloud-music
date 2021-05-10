@@ -1,26 +1,34 @@
 /* 主题色 */
 page {
-  --themeColor: #d43c33
+  --themeColor: #d43c33;
+   font-family: 
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    "WenQuanYi Micro Hei",
+    sans-serif;
 }
 
 /* 重置标签默认 */
 image {
   width: 100%;
 }
+
 page,
 button,
 view,
 swiper,
-swiper-item
-{
+swiper-item,
+scroll-view {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
 .paadding30Rpx {
   padding: 30rpx;
 }
 
 
 /* 引入iconfont 图标 */
-@import './assets//style/icofont.wxss'
+@import './assets//style/icofont.wxss';
+@import 'app-wxa-auto-dark.wxss'

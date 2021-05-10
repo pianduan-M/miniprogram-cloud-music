@@ -4,7 +4,7 @@ import request from '../../request/index'
 import { makeFriendly } from '../../utils/util'
 
 // 获取应用实例
-const app = getApp()
+var appInst = getApp();
 
 Page({
   data: {
@@ -22,38 +22,21 @@ Page({
   onLoad: function (options) {
     this.getBanners()
     this.getBallList()
-    // this.getRecommend()
-    this.getHomePage()
+    this.getRecommend()
+    // this.getHomePage()
     this.getTopList()
-  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    console.log("index -- onReady");
 
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    console.log("index -- onHide");
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    console.log("index -- onUnload");
   },
   onShow() {
     if (typeof this.getTabBar === 'function' &&
       this.getTabBar()) {
+      const { isMusicPlay, currentSong } = appInst.globalData
       this.getTabBar().setData({
-        selected: 0
+        selected: 0,
+        isShow: true,
+        isMusicPlay,
+        currentSong
       })
     }
   },
@@ -75,7 +58,7 @@ Page({
   },
   // 推荐歌单 数据
   async getRecommend() {
-    const res = await request({ url: '/personalized?limit=5' })
+    const res = await request({ url: '/personalized?limit=6' })
     const recommendList = res.data.result
     recommendList.forEach(item => {
       item.playCount = makeFriendly(item.playCount)
@@ -84,32 +67,7 @@ Page({
       recommendList
     })
   },
-  // 首页数据
-  async getHomePage() {
-    const res = await request({ url: '/homepage/block/page' })
-    // const bannerList = res.data.banners
-    let list = res.data.data.blocks
-    console.log(list);
-    list = list.filter(item => {
-      // 判断是歌单类型
-      if (item.creatives && item.creatives[0].uiElement && item.creatives[0].uiElement.image) {
-        // 循环 格式化播放总数量
-        item.creatives.forEach(v => {
-          if (v.resources && v.resources[0].resourceExtInfo) {
-            v.playCount = makeFriendly(v.resources[0].resourceExtInfo.playCount)
-          } else {
-            v.playCount = false
-          }
-        })
-        return true
 
-      }
-    })
-    this.setData({
-      list,
-      // recommendList
-    })
-  },
   // 排行榜
   async getTopList() {
     const res = await request({ url: '/toplist' })
@@ -130,11 +88,34 @@ Page({
       return {
         id: top.id,
         name: top.name,
-        tracks: top.tracks.slice(0,3)
+        tracks: top.tracks.slice(0, 3)
       }
     })
     this.setData({
       topList
     })
+  },
+  // 添加到播放列表
+  toPlay(e) {
+    // 获取当前歌曲id
+    const { id, parentid } = e.currentTarget.dataset
+    const { topList } = this.data
+    const index = topList.findIndex(item => item.id === parentid)
+    // 存储当前歌单到缓存
+    wx.setStorageSync('playlist', topList[index].tracks);
+    // 存储当前歌曲id到缓存
+    wx.setStorageSync('songId', id);
+
+    // 跳转到播放页面
+    wx.navigateTo({
+      url: '/pages/play_music/index?id=' + id
+    });
+
+  },
+  goSearch() {
+    // 跳转到播放页面
+    wx.navigateTo({
+      url: '/pages/search/index',
+    });
   }
 })

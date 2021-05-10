@@ -1,0 +1,458 @@
+.play_music {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+
+  // 背景层
+  .song_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .8);
+
+    image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100vh;
+      filter: blur(80rpx);
+      // transform: scale(1.5);
+    }
+
+
+    .mask_opacity {
+      animation: mask_opacity 1.5s ease-out 1 both;
+    }
+
+    .mask_opacity1 {
+      animation: mask_opacity1 1.5s ease-in 1 both;
+
+    }
+
+    @keyframes mask_opacity {
+      from {
+        opacity: 0.1;
+        // transform: scale(1.5);
+      }
+
+      to {
+        opacity: 1;
+        // transform: scale(1.5);
+      }
+    }
+
+    @keyframes mask_opacity1 {
+      from {
+        opacity: 1;
+        // transform: scale(1.5);
+      }
+
+      to {
+        opacity: 0;
+        // transform: scale(1.5);
+
+      }
+    }
+
+    // 遮罩
+    .bg_mask {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, .6);
+    }
+  }
+
+  // 顶部状态栏
+  .nav_song_info {
+    // position: absolute;
+    // left: 0;
+    // right: 0;
+    width: 200rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 110rpx;
+
+    .nav_song_name {
+      font-size: 26rpx;
+      padding: 5rpx 0;
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+    }
+
+    .nav_singer {
+      font-size: 20rpx;
+      font-weight: 300;
+    }
+  }
+
+  // 图片封面
+  .play_cover_wrap {
+    padding-top: 300rpx;
+
+    // 封面容器
+    .song-disc {
+      position: relative;
+      width: 70vw;
+      height: 70vw;
+      margin: 0 auto;
+
+      // 磁头
+      .needle {
+        // content: " ";
+        position: absolute;
+        top: -100rpx;
+        left: 46%;
+        z-index: 5;
+        width: 84px;
+        height: 122px;
+        // background: url(//s3.music.126.net/mobile-new/img/needle.png?702cf6d…=) no-repeat;
+        // background-size: contain;
+        transform-origin: 40rpx 0rpx;
+        transform: rotate(0deg);
+        transition: 1s transform;
+
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 52rpx;
+          height: 52rpx;
+          background-color: #fff;
+          border-radius: 50%;
+          transform: translate(9%, -50%);
+        }
+      }
+
+      // 控制磁头
+      .song_disc_rotate {
+        transform-origin: 40rpx 0rpx;
+        transform: rotate(-30deg);
+      }
+
+      // 胶片 容器
+      .song-turn {
+        width: 100%;
+        height: 100%;
+
+        // 胶片图片
+        &:before {
+          content: " ";
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 2;
+          background: url(//s3.music.126.net/mobile-new/img/disc.png) no-repeat;
+          background-size: contain;
+        }
+
+        // 封面容器
+        .song-rollwrap {
+          position: absolute;
+          width: 65%;
+          height: 65%;
+          left: 50%;
+          top: 50%;
+          z-index: 1;
+          transform: translate(-50%, -50%);
+
+          // 封面图片 如果没有封面 默认显示
+          .song-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            background: url(//s3.music.126.net/mobile-new/img/disc_default.png?ba7c53e…=) no-repeat;
+            background-size: contain;
+
+            // 封面
+            image {
+              width: 100%;
+              vertical-align: middle;
+            }
+          }
+        }
+
+        .song-lgour {
+          .song-light.a-circling.z-pause.__web-inspector-hide-shortcut__ {}
+        }
+      }
+
+      // 封面旋转动画
+      .cover_rotate {
+        animation: cover_rotate 10s linear infinite;
+      }
+
+      @keyframes cover_rotate {
+        from {
+          transform: rotate(0deg);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    }
+  }
+
+  // 底部播放按钮
+  .play_tools {
+    height: 300rpx;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    .tools_head {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+
+      .iconfont {
+        font-size: 40rpx;
+      }
+
+      .icon-comment- {
+        font-size: 36rpx;
+      }
+    }
+
+    // 进度条
+    .tools_progress_wrap {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: nowrap;
+
+      .time {
+        flex: 1;
+        text-align: center;
+        font-size: 20rpx;
+        color: #919191;
+      }
+
+      // touch 区域
+      .progress_container {
+        padding: 20rpx 0;
+        flex: 4;
+        display: flex;
+        align-items: center;
+      }
+
+      .progress_wrap {
+        position: relative;
+        width: 100%;
+        height: 4rpx;
+        background-color: rgba(255, 255, 255, .3);
+
+        .progress_inner {
+          width: 0%;
+          height: 100%;
+          background-color: #fff;
+        }
+
+        .progress_btn {
+          position: absolute;
+          left: 0;
+          top: 50%;
+          width: 16rpx;
+          height: 16rpx;
+          background-color: #fff;
+          border-radius: 50%;
+          transform: translateY(-50%);
+          transition: 0.5s transform;
+
+          &.touch_btn {
+            transform: translateY(-50%) scale(1.5);
+          }
+        }
+      }
+
+    }
+
+    // 媒体按钮
+    .tools_play_btn {
+      width: 100%;
+      position: relative;
+      height: 100rpx;
+      padding: 0 30rpx;
+
+      // display: flex;
+      // justify-content: space-around;
+      // align-items: center;
+      .other_btn_wrap {
+
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        left: 60rpx;
+        right: 60rpx;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        // 播放模式
+        .play_mode {
+          position: relative;
+
+          .iconfont {
+            font-size: 40rpx;
+          }
+
+          .icon-one {
+            transform: scale(2);
+          }
+        }
+
+      }
+
+      .play_btn_wrap {
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        left: 30vw;
+        right: 30vw;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        // 播放按钮
+        .paly_btn {
+          .iconfont {
+            font-size: 80rpx;
+            color: rgba(255, 255, 255, .9);
+          }
+        }
+
+        .next_btn {
+          transform: rotateY(180deg);
+        }
+      }
+
+
+    }
+  }
+
+  // 歌词
+  .lyrics_container {
+    position: absolute;
+    top: 20%;
+    bottom: 20%;
+    left: 0;
+    right: 0;
+    color: #919191;
+    text-align: center;
+    overflow: hidden;
+
+    .scrollLyrics {
+      width: 100%;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .lrc_item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .lrc {
+          font-size: 30rpx;
+          padding: 20rpx 0;
+          width: 70%;
+        }
+      }
+
+      .current {
+        color: #fff;
+      }
+    }
+  }
+
+  // 媒体查询 简单适配平板
+  @media only screen and (min-device-width: 420px) and (max-device-width:1200px) {
+
+    /* 在计算机屏幕中宽度在[960px,1200px]区间会应用里面的样式 */
+    .play_cover_wrap {
+      padding-top: 20%;
+
+    }
+
+    // 磁头
+    .needle {
+      position: absolute;
+      top: -50rpx !important;
+      left: 46%;
+      z-index: 5;
+      width: 123rpx !important;
+      // background: url(//s3.music.126.net/mobile-new/img/needle.png?702cf6d…=) no-repeat;
+      // background-size: contain;
+      transform-origin: 40rpx 0rpx;
+      transform: rotate(-9deg) !important;
+      transition: 1s transform;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 50rpx;
+        height: 50rpx;
+        background-color: #fff;
+        border-radius: 50%;
+        transform: translate(10%, -50%);
+      }
+    }
+
+    // 控制磁头
+    .song_disc_rotate {
+      transform-origin: 40rpx 0rpx;
+      transform: rotate(-30deg) !important;
+    }
+
+    .nav_song_info {
+      margin-left: 50rpx !important;
+
+
+      .nav_song_name {
+        font-size: 20rpx;
+        padding: 7rpx 0;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+      }
+
+      .nav_singer {
+        font-size: 15rpx;
+        font-weight: 300;
+      }
+    }
+  }
+}

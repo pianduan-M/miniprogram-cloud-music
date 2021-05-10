@@ -1,0 +1,224 @@
+.search {
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  padding: 30rpx;
+
+  // 头部 表单区
+  .search_head {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .search_wrap {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 4;
+
+      input {
+        flex: 4;
+        padding: 10rpx 70rpx;
+        border-radius: 50rpx;
+        background-color: #f8f8f8;
+      }
+
+      .input_plac {
+        color: #c7c7c7;
+        font-weight: 400;
+        font-size: 26rpx;
+      }
+
+      icon {
+        position: absolute;
+        margin: 0 15rpx;
+      }
+
+      .clear_icon {
+        right: 0;
+      }
+    }
+
+    .search_btn {
+      width: 80rpx;
+      text-align: right;
+      flex-shrink: 0;
+      float: right;
+    }
+
+  }
+
+  // 内容区
+  .search_content {
+    position: relative;
+
+    // 历史搜索
+    .search_his {
+      // padding: 20rpx 0;
+
+      .search_his_wrap {
+        display: flex;
+        align-items: center;
+        height: 90rpx;
+
+        .his_title {
+          padding-right: 30rpx;
+          flex-shrink: 0;
+          font-size: 28rpx;
+        }
+
+        .his_item_content {
+          display: flex;
+          align-items: center;
+          padding-top: 20rpx;
+          overflow: hidden;
+          height: 100rpx;
+
+          .his_item {
+            flex-shrink: 0;
+            margin-top: 20rpx;
+            margin-right: 15rpx;
+            font-size: 24rpx;
+            font-weight: 300;
+            color: #919191;
+            background-color: #f6f6f6;
+            padding: 10rpx 20rpx;
+            border-radius: 50rpx;
+          }
+        }
+
+        .his_delete {
+          width: 50rpx;
+          flex-shrink: 0;
+          text-align: right;
+
+          text.iconfont {}
+        }
+      }
+    }
+
+    // 热搜区域
+    .hot_search {
+
+      // 容器
+      .hot_search_wrap {
+
+        // 头部
+        .hot_head {
+          display: flex;
+          justify-content: space-between;
+          font-size: 28rpx;
+          padding: 20rpx 0;
+
+          // 右侧播放icon
+          .play_icon {
+            font-size: 24rpx;
+            border-radius: 30rpx;
+            padding: 0 10rpx;
+            border: 1rpx solid rgb(202, 202, 202);
+            font-weight: 300;
+            position: relative;
+            padding-left: 30rpx;
+
+            &::after {
+              content: "";
+              position: absolute;
+              left: 12rpx;
+              top: 2rpx;
+
+              border: 15rpx solid transparent;
+              border-left-color: #000;
+              transform: scaleY(0.6);
+            }
+          }
+        }
+
+        // 列表区
+        .hot_contnet {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          width: 100%;
+
+          .hot_item_wrap {
+            width: 50%;
+            flex-shrink: 0;
+            padding: 10rpx 0;
+            font-size: 26rpx;
+            display: flex;
+
+            .num {
+              width: 40rpx;
+              flex-shrink: 0;
+              color: #919191;
+            }
+
+            .name {}
+
+            .icon {
+              image {
+                width: 30rpx;
+                height: 20rpx;
+                margin-left: 10rpx;
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .search_container {
+    position: relative;
+  }
+  // 搜索建议
+  .search_result {
+    position: absolute;
+    left: 0;
+    top: 90rpx;
+    right: 0;
+    width: 100vw;
+    height: 80vh;
+    background-color: #fff;
+    color: #3a3a3a;
+    z-index: 999;
+
+    .search_result_wrap {
+      padding-top: 10rpx;
+
+      .result_item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 15rpx;
+
+        &::after {
+          content: '';
+          position: absolute;
+          left: 50rpx;
+          right: 0;
+          bottom: 0;
+          height: 1rpx;
+          transform: scaleY(0.5);
+          background-color: #f1f1f1;
+        }
+
+        icon {
+          width: 50rpx;
+          flex-shrink: 0;
+        }
+
+        .item_value {
+          position: relative;
+          width: 100%;
+
+        }
+      }
+    }
+  }
+}

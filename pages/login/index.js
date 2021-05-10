@@ -245,9 +245,10 @@ Page({
       wx.setStorageSync('userInfo', result.data.profile);
       wx.setStorageSync('token', result.data.token);
       wx.setStorageSync("Cookie", result.data.cookie);
-      // wx.navigateBack({
-      //   delta: 1
-      // });
+      showToast({title:'登录成功！'})
+      wx.navigateBack({
+        delta: 1
+      });
     }
   }
 })

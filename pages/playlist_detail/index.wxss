@@ -1,1 +1,238 @@
-/* pages/playlist_detail/index.wxss */
+view.playlist_detail {
+  position: relative;
+  height: 100%;
+}
+view.playlist_detail view.playlist_detail_info {
+  position: relative;
+  display: flex;
+  height: 400rpx;
+  overflow: hidden;
+  align-items: center;
+  padding: 30rpx;
+}
+view.playlist_detail view.playlist_detail_info .info_bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  filter: blur(80rpx);
+  width: 100%;
+  height: 100%;
+  transform: scale(1.5);
+}
+view.playlist_detail view.playlist_detail_info .info_bg view {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_left {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  background-color: #f6f6f6;
+  border-radius: 15rpx;
+  overflow: hidden;
+  margin-right: 30rpx;
+  flex-shrink: 0;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_left .play_count {
+  position: absolute;
+  top: 10rpx;
+  right: 10rpx;
+  font-size: 20rpx;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0 10rpx;
+  border-radius: 20rpx;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_left .play_count .iconfont {
+  font-size: 20rpx;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right {
+  display: flex;
+  height: 200rpx;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right view.playlist_detail_name {
+  width: 200px;
+  overflow: hidden;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right view.playlist_detail_name .playlist_name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right view.playlist_detail_name .user_info {
+  margin-top: 15rpx;
+  display: flex;
+  align-items: center;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right view.playlist_detail_name .user_info view.user_avatar {
+  width: 50rpx;
+  height: 50rpx;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-right: 15rpx;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right view.playlist_detail_name .user_info view.user_name {
+  font-size: 24rpx;
+  font-weight: 300;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right view.playlist_detail_name .user_info view.user_name .iconfont {
+  font-size: 24rpx;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right .playlist_desc {
+  width: 100%;
+  font-size: 24rpx;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right .playlist_desc .desc {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+view.playlist_detail view.playlist_detail_info view.playlist_detail_right .playlist_desc .iconfont {
+  font-size: 24rpx;
+  float: right;
+}
+view.playlist_detail view.playlist_tool {
+  width: 80%;
+  padding: 20rpx 0;
+  background-color: #fff;
+  box-shadow: 0rpx 0rpx 20rpx rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+  border-radius: 50rpx;
+  transform: translateY(-50%);
+}
+view.playlist_detail view.playlist_tool .tool_wrap {
+  display: flex;
+  justify-content: space-around;
+}
+view.playlist_detail view.playlist_tool .tool_wrap .tool_item {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  border: none;
+  padding: 0;
+  background: none;
+  font-size: 26rpx;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.8);
+}
+view.playlist_detail view.playlist_tool .tool_wrap .tool_item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1rpx;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: scaleX(0.5);
+}
+view.playlist_detail view.playlist_tool .tool_wrap .tool_item .iconfont {
+  margin-right: 10rpx;
+  font-size: 26rpx;
+  font-weight: 400;
+}
+view.playlist_detail .playlist_content {
+  position: relative;
+  padding: 30rpx 0;
+}
+view.playlist_detail .playlist_content .playlist_content_head {
+  display: flex;
+}
+view.playlist_detail .playlist_content .playlist_content_head .head_left {
+  width: 80rpx;
+  flex-shrink: 0;
+  text-align: center;
+}
+view.playlist_detail .playlist_content .playlist_content_head .head_left .iconfont {
+  color: var(--themeColor);
+}
+view.playlist_detail .playlist_content .playlist_content_head .head_center {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+view.playlist_detail .playlist_content .playlist_content_head .head_center .num {
+  font-size: 24rpx;
+  color: #919191;
+  margin-left: 10rpx;
+}
+view.playlist_detail .playlist_content .playlist_content_head .head_center .icon {
+  width: 50rpx;
+  flex-shrink: 0;
+  text-align: center;
+  transform: scale(1.2);
+}
+view.playlist_detail .playlist_content .playlist_content_head .head_right {
+  width: 80rpx;
+  flex-shrink: 0;
+  text-align: center;
+}
+view.playlist_detail .playlist_content .playlist_content_list {
+  padding-top: 20rpx;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item {
+  padding: 10rpx 0;
+  display: flex;
+  align-items: center;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .num {
+  width: 80rpx;
+  flex-shrink: 0;
+  text-align: center;
+  color: #919191;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .num .iconfont {
+  color: var(--themeColor);
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .song_name_wrap {
+  width: 100%;
+  overflow: hidden;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .song_name_wrap .song_name {
+  width: 100%;
+  font-size: 28rpx;
+  color: rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .song_name_wrap .singer {
+  display: block;
+  width: 100%;
+  font-weight: 300;
+  font-size: 24rpx;
+  color: #919191;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .icon {
+  width: 50rpx;
+  flex-shrink: 0;
+  text-align: center;
+  transform: scale(1.1);
+  color: #919191;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .item_menu {
+  width: 80rpx;
+  flex-shrink: 0;
+  text-align: center;
+}

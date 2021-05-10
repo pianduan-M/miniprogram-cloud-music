@@ -1,0 +1,92 @@
+/* 
+此文件为开发者工具生成，生成时间: 2021/5/9 上午10:30:17
+使用方法：
+在 index.wxss 文件末尾引入样式
+```
+@import "./index-wxa-auto-dark.wxss";
+```
+ */
+
+@media (prefers-color-scheme: dark) {
+    .user_container {
+        background-color: rgb(24, 24, 24);
+    }
+
+    .user_container .user_info .user_avatar {
+        border: rgb(0, 0, 0);
+    }
+
+    .user_container .user_info .user_name text {
+        color: rgb(255, 255, 255);
+    }
+
+    .user_container .like_music {
+        background-color: rgb(17, 17, 17);
+    }
+
+    .user_container .like_music .like_music_container .like_music_pic {
+        background-color: rgb(106, 106, 106);
+        border: rgb(0, 0, 0);
+    }
+
+    .user_container .like_music .like_music_container .like_music_pic .iconfont {
+        color: rgb(17, 17, 17);
+    }
+
+    .user_container .like_music .like_music_container .like_music_text {
+        color: rgb(225, 225, 225);
+    }
+
+    .user_container .like_music .like_music_container .like_music_text .num {
+        color: rgb(106, 106, 106);
+    }
+
+    .user_container .like_music .like_music_container .like_music_text .num .iconfont {
+        color: rgb(0, 70, 95);
+    }
+
+    .user_container .playlist .playlist_tab .tab_item:first-child::after {
+        background-color: rgb(106, 106, 106);
+    }
+
+    .user_container .playlist .playlist_tab .tab_item.active text::before {
+        background: rgb(0, 0, 0);
+    }
+
+    .user_container .playlist .fixed {
+        background-color: rgb(17, 17, 17);
+    }
+
+    .user_container .playlist .playlist_content {
+        background-color: rgb(24, 24, 24);
+    }
+
+    .user_container .playlist .playlist_content .created_playlist {
+        background-color: rgb(17, 17, 17);
+    }
+
+    .user_container .playlist .playlist_content .created_playlist .created_playlist_title {
+        color: rgb(106, 106, 106);
+    }
+
+    .user_container .playlist .playlist_content .created_playlist .created_playlist_content .default {
+        color: rgb(106, 106, 106);
+    }
+
+    .user_container .playlist .playlist_content .created_playlist .created_playlist_content .playlist_item .playlist_item_pic {
+        background-color: rgb(22, 22, 22);
+        border: rgb(0, 0, 0);
+    }
+
+    .user_container .playlist .playlist_content .created_playlist .created_playlist_content .playlist_item .playlist_item_text {
+        color: rgb(225, 225, 225);
+    }
+
+    .user_container .playlist .playlist_content .created_playlist .created_playlist_content .playlist_item .playlist_item_text .num {
+        color: rgb(106, 106, 106);
+    }
+
+    .user_container .playlist .playlist_content .created_playlist .created_playlist_content .playlist_item .playlist_item_tool {
+        color: rgb(106, 106, 106);
+    }
+}

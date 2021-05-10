@@ -1,18 +1,23 @@
 .home {
-  height: 100%;
-  padding-top: 90rpx;
-  padding-bottom: 150rpx;
+  height: 100vh;
   background-color: #f6f6f6;
+  overflow: hidden;
+  padding-bottom: 90rpx;
+
+  // 容器
+  .home_content {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 90rpx );
+    padding-bottom: 150rpx;
+  }
 
   // 搜索框
   .search_wrap {
     width: 100vw;
     padding: 30rpx;
-    position: fixed;
-    top: 0;
-    left: 0;
     background-color: #fff;
-    z-index: 999;
+   
 
     button {
       width: 100%;
@@ -29,14 +34,16 @@
 
   // 轮播图
   .banner {
-    padding-top: 20rpx;
     background-color: #fff;
-
+    height: 300rpx;
     .banner_item {
       // margin-right: 30rpx;
-      padding: 30rpx;
-
+      // padding: 0 30rpx;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       image {
+        width: 90%;
         border-radius: 30rpx;
         position: relative;
         vertical-align: middle;
@@ -132,12 +139,14 @@
         color: #616161;
         font-size: 24rpx;
         border: 1px solid #ddd;
-        padding: 0 10rpx 0 20rpx;
+        padding: 0 20rpx;
         border-radius: 30rpx;
         display: flex;
         justify-content: center;
         align-items: center;
-        transform: scale(0.8);
+        .iconfont {
+          font-size: 20rpx;
+        }
       }
     }
 
@@ -203,12 +212,14 @@
         color: #616161;
         font-size: 24rpx;
         border: 1px solid #ddd;
-        padding: 0 10rpx 0 20rpx;
+        padding: 0 20rpx;
         border-radius: 30rpx;
         display: flex;
         justify-content: center;
         align-items: center;
-        transform: scale(0.8);
+        .iconfont {
+          font-size: 20rpx;
+        }
       }
     }
 

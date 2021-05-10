@@ -1,3 +1,4 @@
 {
-  "component": true
+  "component": true,
+  "SongList": "../../components/song-list/song-list"
 }

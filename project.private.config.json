@@ -21,6 +21,24 @@
         {
           "name": "登录",
           "pathName": "pages/login/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "歌单详情",
+          "pathName": "pages/playlist_detail/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "播放页面",
+          "pathName": "pages/play_music/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "搜索结果页",
+          "pathName": "pages/search_result/index",
           "scene": null
         }
       ]
