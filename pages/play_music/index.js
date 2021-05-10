@@ -113,6 +113,7 @@ Page({
         }
         appInst.globalData.currentTime = currentTime
 
+        if (this.data.isShowCover) return
         // 匹配歌词
         const { times, lrc_id } = this.data
         // 已经是最后一条歌词 就不需要在匹配了
@@ -177,7 +178,8 @@ Page({
         lrc_id: 0
       })
     })
-
+    // 获取歌词元素实例
+    this.getNode()
   },
 
   onReady() {
@@ -434,24 +436,16 @@ Page({
   // 切换 歌词 / 封面
   handleSwichtCoverLrc(e) {
 
-
-    let { isShowCover } = this.data
-    
-    if (e.type == 'touchstart') {
-      isShowCover = !isShowCover
+    if (e.type === 'touchstart') {
+      this.x = e.changedTouches[0].pageX
     }
-    console.log(isShowCover);
-
-    // if (e.type == 'move') {
-    //   isShowCover = this.data.isShowCover
-    // }
-
-    // if (e.type == 'touchend') {
-    //   if (isShowCover === this.data.isShowCover) return
-    //   this.setData({
-    //     isShowCover
-    //   })
-    // }
+    if (e.type === 'touchend') {
+      if (this.x === e.changedTouches[0].pageX) {
+        this.setData({
+          isShowCover: !this.data.isShowCover
+        })
+      }
+    }
   },
   // 获取node实例
   getNode() {

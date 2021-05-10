@@ -17,7 +17,7 @@
     <view class="bg_mask"></view>
   </view>
   <!-- 封面 -->
-  <view class="play_cover_wrap" hidden="{{!isShowCover}}" bind:touchstart="handleSwichtCoverLrc" bind:touchmove="handleSwichtCoverLrc" bind:touchend="handleSwichtCoverLrc">
+  <view class="play_cover_wrap" hidden="{{!isShowCover}}" bind:touchstart="handleSwichtCoverLrc" bind:touchend="handleSwichtCoverLrc">
     <view class="song-disc">
       <!-- 磁头 -->
       <view class="needle {{isPlay?'':'song_disc_rotate'}}">
@@ -37,7 +37,7 @@
     </view>
   </view>
   <!-- 歌词 -->
-  <view hidden="{{isShowCover}}" class="lyrics_container" bind:touchstart="handleSwichtCoverLrc" bind:touchmove="handleSwichtCoverLrc" bind:touchend="handleSwichtCoverLrc">
+  <view hidden="{{isShowCover}}" class="lyrics_container" bind:touchstart="handleSwichtCoverLrc"  bind:touchend="handleSwichtCoverLrc">
     <scroll-view class="scrollLyrics" enhanced scroll-y show-scrollbar="{{false}}">
       <view wx:for="{{lyrics}}" wx:key="index" class="lrc_item {{lrc_id === (index+1) ? 'current':''}}" id="lrc_{{index}}">
         <view class="lrc">{{item}}</view>
