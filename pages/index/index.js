@@ -117,5 +117,13 @@ Page({
     wx.navigateTo({
       url: '/pages/search/index',
     });
+  },
+  handleUrl(e) {
+    const { name } = e.currentTarget.dataset
+    if(name == "每日推荐"){
+      wx.navigateTo({
+        url: '/pages/recommend_songs/index'
+      });
+    }
   }
 })

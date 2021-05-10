@@ -19,7 +19,7 @@
   </swiper>
   <!-- 首页列表 -->
   <scroll-view show-scrollbar="{{false}}" enhanced class="ball_list" scroll-x enable-flex >
-    <view class="ball_list_item"  wx:for="{{ballList}}" wx:key="id" >
+    <view class="ball_list_item"  wx:for="{{ballList}}" wx:key="id" bindtap="handleUrl" data-name="{{item.name}}" >
       <view class="ball_icon_wrap">
         <view class="ball_icon" style="{{'-webkit-mask-image: url('+ item.iconUrl+')'}}" ></view>
       </view>

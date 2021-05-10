@@ -7,13 +7,13 @@ Page({
     type: 'id',
     // 账号
     user: {
-      value: '17607050745',
+      value: '',
       roleText: '',
       isLegal: false
     },
     // 密码
     password: {
-      value: "qq13133784278",
+      value: "",
       roleText: "",
       isLegal: false
     },
@@ -174,9 +174,8 @@ Page({
       }
     }
   },
-  // 倒计时
+  // 验证码倒计时
   countdown() {
-
     this.intervalId && clearInterval(this.intervalId)
     let index = 60
     this.intervalId = setInterval(() => {
@@ -191,7 +190,7 @@ Page({
       index--
     }, 1000);
   },
-
+  // 登入业务
   async login() {
     const { user, password, type } = this.data
     // 表单验证不成功 直接返回
@@ -211,7 +210,6 @@ Page({
         url, data: { [loginType]: user.value, password: password.value }
       })
     } else {
-      console.log('++++++++++++');
       // 手机验证码登录
       result = await request({
         url: '/captcha/verify',
@@ -237,7 +235,6 @@ Page({
         showToast({ title: '登录成功！' })
         break;
     }
-    console.log(result);
     if (code === 200) {
       // 清除获取验证码按钮倒计时
       this.intervalId && clearInterval(this.intervalId)
@@ -245,7 +242,6 @@ Page({
       wx.setStorageSync('userInfo', result.data.profile);
       wx.setStorageSync('token', result.data.token);
       wx.setStorageSync("Cookie", result.data.cookie);
-      showToast({title:'登录成功！'})
       wx.navigateBack({
         delta: 1
       });

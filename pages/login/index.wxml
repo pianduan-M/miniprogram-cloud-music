@@ -26,7 +26,7 @@
       <view class="login_row">
         <view class="label">密码:</view>
         <view class="form_input">
-          <input type="text"  bindblur="handleFormRoles" bindinput="changInput" id="password" value="{{passoword.value}}" placeholder="输入密码" placeholder-style="font-size: 24rpx" />
+          <input type="password"  bindblur="handleFormRoles" bindinput="changInput" id="password" value="{{passoword.value}}" placeholder="输入密码" placeholder-style="font-size: 24rpx" />
           <view class="roles">{{password.roleText}}</view>
         </view>
       </view>
