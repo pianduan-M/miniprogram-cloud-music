@@ -1,5 +1,6 @@
 import request from '../../request/index.js'
 import { showToast } from '../../utils/util.js'
+var appInst = getApp();
 
 Page({
   data: {
@@ -20,28 +21,31 @@ Page({
     isDisable: false,
     timer: ''
   },
-  // 切换登录类型
-  handleLoginType(e) {
-    const { id } = e.target
-    if (id) {
-      this.setData({
-        type: id,
-        // 切换时 重置表单数据
-        user: {
-          value: '',
-          roleText: ''
-        },
-        password: {
-          value: "",
-          roleText: ""
-        }
-      })
-    }
-
-  },
+  // 切换登录类型 // 暂不支持 没找到验证码 方式获取用户信息的api
+  // handleLoginType(e) {
+  //   if (id) {
+  //     this.setData({
+  //       type: id,
+  //       // 切换时 重置表单数据
+  //       user: {
+  //         value: '',
+  //         roleText: ''
+  //       },
+  //       password: {
+  //         value: "",
+  //         roleText: ""
+  //       }
+  //     })
+  //   }
+  // },
   // 表单输入
   changInput(e) {
     const { id } = e.target
+    if (id === 'phone') {
+      showToast({
+        title: '暂不支持！请使用账号登录'
+      })
+    }
     const { value } = e.detail
     this.setData({
       [id]: {
@@ -218,6 +222,7 @@ Page({
           captcha: password.value
         }
       })
+
     }
     // 处理登录结果
     const { code } = result.data
@@ -235,6 +240,8 @@ Page({
         showToast({ title: '登录成功！' })
         break;
     }
+    console.log(result);
+
     if (code === 200) {
       // 清除获取验证码按钮倒计时
       this.intervalId && clearInterval(this.intervalId)
@@ -242,6 +249,8 @@ Page({
       wx.setStorageSync('userInfo', result.data.profile);
       wx.setStorageSync('token', result.data.token);
       wx.setStorageSync("Cookie", result.data.cookie);
+      appInst.globalData.userInfo = result.data.profile
+
       wx.navigateBack({
         delta: 1
       });

@@ -36,7 +36,7 @@ Page({
     const { id } = e.currentTarget.dataset
     //  保存歌单到全局变量
     appInst.globalData.playlist = this.data.playlist.tracks
-
+    wx.setStorageSync('playlist', this.data.playlist.tracks);
     // 跳转到播放页面
     wx.navigateTo({
       url: '/pages/play_music/index?id=' + id

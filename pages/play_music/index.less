@@ -100,14 +100,18 @@
 
   // 图片封面
   .play_cover_wrap {
-    padding-top: 300rpx;
+    position: absolute;
+    top: 10%;
+    bottom: 300rpx;
+    left: 0;
+    right: 0;
 
     // 封面容器
     .song-disc {
       position: relative;
       width: 70vw;
       height: 70vw;
-      margin: 0 auto;
+      margin: 130rpx auto;
 
       // 磁头
       .needle {
@@ -116,12 +120,12 @@
         top: -100rpx;
         left: 46%;
         z-index: 5;
-        width: 84px;
+        width: 74px;
         height: 122px;
         // background: url(//s3.music.126.net/mobile-new/img/needle.png?702cf6d…=) no-repeat;
         // background-size: contain;
         transform-origin: 40rpx 0rpx;
-        transform: rotate(0deg);
+        transform:  rotate(6deg);
         transition: 1s transform;
 
         &::after {
@@ -129,11 +133,11 @@
           position: absolute;
           left: 0;
           top: 0;
-          width: 52rpx;
-          height: 52rpx;
+          width: 45rpx;
+          height: 45rpx;
           background-color: #fff;
           border-radius: 50%;
-          transform: translate(9%, -50%);
+          transform: translate(19%, -51%);
         }
       }
 
@@ -212,7 +216,7 @@
 
   // 底部播放按钮
   .play_tools {
-    height: 300rpx;
+    height: 20vh;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -397,35 +401,27 @@
 
     /* 在计算机屏幕中宽度在[960px,1200px]区间会应用里面的样式 */
     .play_cover_wrap {
-      padding-top: 20%;
-
-    }
-
-    // 磁头
-    .needle {
-      position: absolute;
-      top: -50rpx !important;
-      left: 46%;
-      z-index: 5;
-      width: 123rpx !important;
-      // background: url(//s3.music.126.net/mobile-new/img/needle.png?702cf6d…=) no-repeat;
-      // background-size: contain;
-      transform-origin: 40rpx 0rpx;
-      transform: rotate(-9deg) !important;
-      transition: 1s transform;
-
-      &::after {
-        content: "";
+      // 磁头
+      .needle {
         position: absolute;
-        left: 0;
-        top: 0;
-        width: 50rpx;
-        height: 50rpx;
-        background-color: #fff;
-        border-radius: 50%;
-        transform: translate(10%, -50%);
+        top: -50rpx !important;
+        left: 46%;
+        z-index: 5;
+        width: 123rpx !important;
+        // background: url(//s3.music.126.net/mobile-new/img/needle.png?702cf6d…=) no-repeat;
+        // background-size: contain;
+        transform-origin: 40rpx 0rpx;
+        transform: rotate(-9deg) !important;
+        transition: 1s transform;
+
+        &::after {
+          transform: translate(0, -63%) !important;
+        }
       }
+     
+
     }
+
 
     // 控制磁头
     .song_disc_rotate {

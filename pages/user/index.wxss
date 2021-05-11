@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   background-color: #f6f6f6;
-  margin-bottom: 200rpx;
+  padding-bottom: 180rpx;
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -34,10 +34,17 @@
 .user_container .user_info .user_name.between {
   justify-content: space-between;
 }
-.user_container .user_info .user_name text {
+.user_container .user_info .user_name .text {
   font-size: 32rpx;
   font-weight: 400;
   color: #000000;
+}
+.user_container .user_info .user_name .logout {
+  font-size: 26rpx;
+  border: 1px solid currentColor;
+  padding: 2rpx 15rpx;
+  color: var(--themeColor);
+  border-radius: 60rpx;
 }
 .user_container .like_music {
   padding: 30rpx;
@@ -102,7 +109,7 @@
   border-radius: 20rpx;
   background-color: #fff;
   padding: 20rpx;
-  margin-top: 20rpx;
+  margin: 20rpx 0;
 }
 .user_container .playlist .playlist_content .created_playlist #playlist_created {
   position: relative;

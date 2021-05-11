@@ -14,14 +14,11 @@ Component({
     currentIndex: {
       type: Number,
       value: 0
+    },
+    playlist: {
+      type: Array,
+      value: []
     }
-  },
-  attached() {
-    const playlist = appInst.globalData.playlist
-
-    this.setData({
-      playlist
-    })
   },
   methods: {
     // 显示播放列表
@@ -32,6 +29,11 @@ Component({
     playListSong(e) {
       const { id } = e.currentTarget.dataset
       this.triggerEvent('handlePlay', id)
+    },
+    // 列表删除
+    deleteSong(e) {
+      const { id } = e.currentTarget.dataset
+      this.triggerEvent('deleteSong', id)
     },
   }
 })

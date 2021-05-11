@@ -1,7 +1,7 @@
 <scroll-view class="play_music">
   <NavBar background="rgba(0,0,0,0)" style="position: fixed">
     <view slot="left">
-      <navigator hover-class="none" open-type="navigateBack" style="margin-left:30rpx" bindtap="goBack">
+      <navigator hover-class="none" open-type="navigateBack" style="margin-left:30rpx; padding:20rpx" bindtap="goBack">
         <text class="iconfont icon-back "></text>
       </navigator>
     </view>
@@ -26,7 +26,7 @@
       <view class="song-turn {{isPlay?'cover_rotate':''}}">
         <view class="song-rollwrap">
           <view class="song-img a-circling z-pause">
-            <image class="u-img __web-inspector-hide-shortcut__" mode="scaleToFill" src="{{currentSong.al.picUrl}}" />
+            <image class="u-img __web-inspector-hide-shortcut__" mode="widthFix" src="{{currentSong.al.picUrl}}" />
           </view>
         </view>
         <view class="song-lgour">
@@ -89,7 +89,7 @@
         </view>
       </view>
       <!-- 总时间 -->
-      <view class="total_time time">{{formart(duration)}}</view>
+      <view class="total_time time">{{formart(currentSong.dt/1000)}}</view>
     </view>
     <!-- 底部媒体按钮 -->
     <view class="tools_play_btn">
@@ -116,6 +116,6 @@
       </view>
     </view>
   </view>
-  <SongList bind:handlePlay="playListSong" currentIndex="{{currentIndex}}" bind:oncancel="showSongList" style="display:{{isShowSongList?'':'none'}}"></SongList>
+  <SongList bind:handlePlay="playListSong" playlist="{{playlist}}" currentIndex="{{currentIndex}}" bind:deleteSong="deleteSong" bind:oncancel="showSongList" style="display:{{isShowSongList?'':'none'}}"></SongList>
 </scroll-view>
 <!-- scroll-into-view="{{!isMoveLrc&&('lrc_'+(lrc_id-5))}}" -->

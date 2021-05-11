@@ -15,6 +15,7 @@ page {
 }
 .lxy-nav-bar {
   color: rgba(255, 255, 255, 1);
+  position: relative;
 }
 .lxy-nav-bar .ios {
   --height: 44px; /* 4*2+32 */
@@ -171,3 +172,4 @@ page {
   background-repeat: no-repeat;
   background-size: cover;
 }
+

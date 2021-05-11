@@ -199,5 +199,29 @@ Page({
       })
     }
   },
+  logout() {
+    wx.showModal({
+      title: '',
+      content: '退出登录？',
+      showCancel: true,
+      cancelText: '取消',
+      cancelColor: '#000000',
+      confirmText: '确定',
+      confirmColor: '#3CC51F',
+      success: async (result) => {
+        if (result.confirm) {
+          // 退出登录
+          await request({url:'/logout'})
+          // 清除缓存
+          wx.clearStorageSync();
+          // 跳转页面
+          wx.reLaunch({
+            url: '/pages/user/index'
+          });
+        }
 
+      }
+
+    });
+  }
 })

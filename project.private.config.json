@@ -39,6 +39,12 @@
         {
           "name": "搜索结果页",
           "pathName": "pages/search_result/index",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "每日推荐",
+          "pathName": "pages/recommend_songs/index",
           "scene": null
         }
       ]

@@ -7,14 +7,14 @@
       <text class="num">({{playlist.length}})</text>
     </view>
     <!-- 歌单列表项 -->
-    <scroll-view class="song_list_content" scroll-y>
-      <view class="song_list_item " wx:for="{{playlist}}" wx:key="id" bindtap="playListSong" data-id="{{item.id}}">
+    <scroll-view class="song_list_content" scroll-y enhanced scroll-into-view="{{'song_'+currentIndex}}">
+      <view class="song_list_item " wx:for="{{playlist}}" wx:key="id" id="{{'song_'+index}}" bindtap="playListSong" data-id="{{item.id}}">
         <view class="song_name_wrap ">
           <view class="song_name {{index===currentIndex?'isCurrent':''}}">{{item.name}}</view>
           <text class="{{index===currentIndex?'isCurrent':''}}">-</text>
           <view class="singer {{index===currentIndex?'isCurrent':''}}">{{item.ar[0].name}}</view>
         </view>
-        <view class="song_icon">
+        <view class="song_icon" catchtap="deleteSong" data-id="{{item.id}}">
           <text class="iconfont icon-delete"></text>
         </view>
       </view>

@@ -23,10 +23,9 @@ Page({
     // 当前播放列表索引
     currentIndex: 0,
     // 控制播放
-    isPlay: true,
+    isPlay: false,
     // 当前播放列表
     playlist: [],
-    duration: 0,
     currentTime: 0,
     // 进度条播放进度
     progress: 0,
@@ -52,18 +51,25 @@ Page({
   onLoad: function (options) {
     // 获取背景音乐管理
     this.BackgroundAudioManager = wx.getBackgroundAudioManager();
-    const { currentSong, playlist, playMode, isMusicPlay } = appInst.globalData
+    const { currentSong, playlist, playMode, isMusicPlay, lyrics, times } = appInst.globalData
     // 如果没有id 说明是从tabbar进来的 从全局读取数据
+    const currentIndex = playlist.findIndex(item => item.id == currentSong.id)
     if (!options.id) {
+      const { bg_list } = this.data
+      bg_list.push(currentSong.al.picUrl)
       this.setData({
         currentSong,
         playlist,
         playMode,
+        times,
+        lyrics,
+        bg_list,
+        currentIndex,
         isPlay: isMusicPlay
       })
       // 如果当前是暂停状态
       if (!isMusicPlay) {
-        const { duration, currentTime, url } = appInst.globalData
+        const { duration, currentTime } = appInst.globalData
         this.setData({
           duration,
           currentTime
@@ -71,7 +77,6 @@ Page({
         // 设置进度条
         this.setProgress(currentTime, duration)
       }
-
     } else {
       // 得到当前id
       const songId = options.id
@@ -99,17 +104,18 @@ Page({
       if (!this.data.isMove) {
         let currentTime = this.BackgroundAudioManager.currentTime
 
-        const duration = this.BackgroundAudioManager.duration
-        if (currentTime < this.data.currentTime && duration === this.data.duration) {
+        if (currentTime < this.data.currentTime) {
           currentTime = this.data.currentTime
         }
+        // 设置进度条
+        this.setProgress(currentTime)
 
-        this.setProgress(currentTime, duration)
         if (!this.data.duration) {
+          const duration = this.BackgroundAudioManager.duration
+
           this.setData({
             duration
           })
-          appInst.globalData.duration = duration
         }
         appInst.globalData.currentTime = currentTime
 
@@ -127,7 +133,7 @@ Page({
           this.setData({
             lrc_id: index
           })
-          if (index < 5) return
+          if (index < 5) index = 5
 
           this.lrcScroll.scrollTo({
             top: (index - 5) * 42,
@@ -163,6 +169,7 @@ Page({
         isPlay: false,
       })
       appInst.globalData.isMusicPlay = false
+      appInst.setStorage()
     })
 
     // 播放结束事件
@@ -175,6 +182,7 @@ Page({
       }
       this.setData({
         currentTime: 0,
+        duration: 0,
         lrc_id: 0
       })
     })
@@ -219,8 +227,9 @@ Page({
     if (playMode === 'random') {
       currentIndex = Math.floor(Math.random() * playlist.length)
     }
-
+    // 循环播放 设置别超出界限
     currentIndex = currentIndex < 0 ? playlist.length - 1 : currentIndex
+    currentIndex = currentIndex >= playlist.length ? 0 : currentIndex
     const songId = playlist[currentIndex].id
     appInst.globalData.currentIndex = currentIndex
     this.setSongSrc(songId)
@@ -265,20 +274,25 @@ Page({
     this.setData({
       currentSong,
       bg_list,
-      currentIndex
+      currentIndex,
+      isPlay: true
     })
+    wx.setStorageSync('currentSong', currentSong);
     // 保存到全局变量
     appInst.globalData.currentSong = currentSong
     appInst.globalData.url = url
     appInst.globalData.currentIndex = currentIndex
+    appInst.globalData.isMusicPlay = true
     // 通知tabbar
     // PubSub.publish('currentSong', currentSong)
 
   },
   // 设置进度条 时间/进度
-  setProgress(currentTime, duration) {
+  setProgress(currentTime) {
+    const { currentSong } = this.data
     // 读取当前播放进度 并设置
-    let progress = currentTime / duration * 100
+    let progress = (currentTime * 1000) / currentSong.dt * 100
+
     progress = progress > 100 ? 100 : progress
     this.setData({
       currentTime,
@@ -297,6 +311,7 @@ Page({
 
     const progress_width = progeress_ele.width
     const currentTime = pageX / progress_width * duration
+
     this.setData({
       currentTime
     })
@@ -305,17 +320,9 @@ Page({
       this.setData({
         isMove: true
       })
-      this.setProgress(pageX, progress_width)
     }
     if (e.type == 'touchmove') {
-      if (this.isFlag) return
-
-      setTimeout(() => {
-        this.isFlag = false
-
-      }, 100);
       this.setProgress(pageX, progress_width)
-      this.isFlag = true
     }
 
     if (e.type == 'touchend') {
@@ -333,9 +340,10 @@ Page({
       this.BackgroundAudioManager.pause()
     } else {
       if (!this.BackgroundAudioManager.src) {
-        const { currentSong } = this.data
-        this.BackgroundAudioManager.src = BASE_SONG_URL + currentSong.id
-        this.BackgroundAudioManager.title = currentSong.name
+        const { currentSong, currentTime } = this.data
+        this.setSongSrc(currentSong.id)
+        this.currentTime > 0 && this.BackgroundAudioManager.seek(currentTime)
+        return
       }
       this.BackgroundAudioManager.play()
     }
@@ -348,10 +356,38 @@ Page({
   },
   // 列表播放
   playListSong(e) {
+    if (e.detail === this.data.currentSong.id) return
     this.setData({
       currentIndex: e.detail
     })
     this.setSongSrc(e.detail)
+  },
+  // 列表删除
+  deleteSong(e) {
+    let { playlist, currentIndex } = this.data
+    // 找出要删除歌曲的索引
+    let index = playlist.findIndex(item => item.id === e.detail)
+
+    playlist.splice(index, 1)
+    appInst.globalData.playlist = playlist
+    wx.setStorageSync('playlist', playlist);
+    // 删除歌曲前面的只需要同步当前歌曲索引
+    if (index < currentIndex) {
+      currentIndex = currentIndex - 1
+      this.setData({
+        currentIndex
+      })
+    }
+
+    // 同步删除更新后的歌单
+    this.setData({
+      playlist
+    })
+    // 删除的是当前播放歌曲
+    if (index === currentIndex) {
+      appInst.globalData.currentIndex = currentIndex - 1
+      this.handleSwicth()
+    }
   },
   // 背景图片 流畅过度
   handleBgImage(e) {
@@ -405,16 +441,22 @@ Page({
     // [00:00.92]
     var timeReg = /\[(\d*:\d*\.\d*)\]/
     // 遍历取出每一条歌词
+    console.log(array);
     array.forEach(ele => {
       // 处理歌词
-      var lrc = ele.split("]")[1];
+      var lrc = ele.split("]");
       // 排除空字符串(没有歌词的)
       if (!lrc) return;
-      lyrics.push(lrc);
+      if (ele.indexOf('][') !== -1) {
+        lyrics.push(lrc[2]);
+        // array.push(lrc[0] + ']' + lrc[2])
+        ele = lrc[1] + ']'
+      } else {
+        lyrics.push(lrc[1]);
+      }
 
       // 处理时间
       var res = timeReg.exec(ele);
-      // console.log(res);
       if (res == null) return true;
       var timeStr = res[1]; // 00:00.92
       var res2 = timeStr.split(":");
@@ -423,22 +465,23 @@ Page({
       var time = parseFloat(Number(min + sec).toFixed(2));
       times.push(time);
     });
-
     this.setData({
       times,
       lyrics
     })
     appInst.globalData.times = times
     appInst.globalData.lyrics = lyrics
+    wx.setStorageSync('times', times);
+    wx.setStorageSync('lyrics', lyrics);
   },
   // 切换 歌词 / 封面
   handleSwichtCoverLrc(e) {
-
+    // 只有手指开始坐标 跟 抬起是一样的 才需要切换页面
     if (e.type === 'touchstart') {
       this.x = e.changedTouches[0].pageX
     }
     if (e.type === 'touchend') {
-      if (this.x === e.changedTouches[0].pageX) {
+      if (Math.abs(this.x - e.changedTouches[0].pageX) <= 2) {
         this.setData({
           isShowCover: !this.data.isShowCover
         })

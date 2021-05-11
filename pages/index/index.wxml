@@ -6,85 +6,84 @@
       <text>搜索</text>
     </button>
   </view>
-  <!-- 轮播图 -->
-  <scroll-view class="home_content"  scroll-y >
-   
-
-     <swiper class="banner" indicator-active-color="#f64649" indicator-dots circular>
-    <swiper-item class="banner_item" wx:for="{{bannerList}}" wx:key="targetId">
-      <image src="{{item.imageUrl}}" mode="widthFix">
-        <view class="banner_title" style="{{'background:'+item.titleColor}}">{{item.typeTitle}}</view>
-      </image>
-    </swiper-item>
-  </swiper>
-  <!-- 首页列表 -->
-  <scroll-view show-scrollbar="{{false}}" enhanced class="ball_list" scroll-x enable-flex >
-    <view class="ball_list_item"  wx:for="{{ballList}}" wx:key="id" bindtap="handleUrl" data-name="{{item.name}}" >
-      <view class="ball_icon_wrap">
-        <view class="ball_icon" style="{{'-webkit-mask-image: url('+ item.iconUrl+')'}}" ></view>
+  <!-- 内容区 -->
+  <scroll-view class="home_content" refresher-enabled  scroll-y  bindrefresherrefresh="handleResherrefresh" refresher-triggered="{{isTriggered}}" >
+    <!-- 轮播图 -->
+    <swiper class="banner" wx:if="{{bannerList.length>0}}" indicator-active-color="#f64649" autoplay indicator-dots circular>
+      <swiper-item class="banner_item" wx:for="{{bannerList}}" wx:key="targetId">
+        <image src="{{item.imageUrl}}" mode="widthFix">
+          <view class="banner_title" style="{{'background:'+item.titleColor}}">{{item.typeTitle}}</view>
+        </image>
+      </swiper-item>
+    </swiper>
+    <!-- 首页列表 -->
+    <scroll-view show-scrollbar="{{false}}" wx:if="{{ballList.length>0}}" enhanced class="ball_list" scroll-x enable-flex >
+      <view class="ball_list_item"  wx:for="{{ballList}}" wx:key="id" bindtap="handleUrl" data-name="{{item.name}}" >
+        <view class="ball_icon_wrap">
+          <view class="ball_icon" style="{{'-webkit-mask-image: url('+ item.iconUrl+')'}}" ></view>
+        </view>
+        <view class="ball_title">{{item.name}}</view>
+      </view >
+    </scroll-view>
+    <!-- 推荐歌单 -->
+    <view class="recommend_resource paadding30Rpx"  wx:if="{{recommendList.length>0}}" >
+        <view class="recommed_title">
+          <view class="recommed_title_left">推荐歌单</view>
+          <view class="recommed_title_right" >
+            <text class="more">更多</text>
+            <text class="iconfont icon-rightarrow"> </text>
+          </view>
+        </view>
+        <scroll-view show-scrollbar="{{false}}" enhanced  class="recommend_resource_content" scroll-x enable-flex >
+        
+          <navigator url="/pages/playlist_detail/index?id={{item.id}}" class="recomment_item" wx:for="{{recommendList}}"  wx:key="id" >
+            <image src="{{item.picUrl}}" mode="scaleFix" ></image>
+            <view class="recomment_name">{{item.name}}</view>
+            <view class="recomment_icon" wx:if="{{item.playCount}}">
+              <text class="iconfont icon-play"></text>
+              <text>{{item.playCount }}</text>
+            </view>
+          </navigator>
+        </scroll-view>
       </view>
-      <view class="ball_title">{{item.name}}</view>
-    </view >
-  </scroll-view>
-   <!-- 推荐歌单 -->
-   <view class="recommend_resource paadding30Rpx">
-      <view class="recommed_title">
-        <view class="recommed_title_left">推荐歌单</view>
-        <view class="recommed_title_right" >
+
+    <!-- 排行榜 -->
+    <view class="hot_top" wx:if="{{topList.length>0}}" >
+        <!-- 标题 -->
+      <view class="hot_top_title">
+        <view class="hot_title_left">排行榜</view>
+        <view class="hot_title_right">
           <text class="more">更多</text>
           <text class="iconfont icon-rightarrow"> </text>
         </view>
       </view>
-      <scroll-view show-scrollbar="{{false}}" enhanced  class="recommend_resource_content" scroll-x enable-flex >
-      
-        <navigator url="/pages/playlist_detail/index?id={{item.id}}" class="recomment_item" wx:for="{{recommendList}}"  wx:key="id" >
-          <image src="{{item.picUrl}}" mode="scaleFix" ></image>
-          <view class="recomment_name">{{item.name}}</view>
-          <view class="recomment_icon" wx:if="{{item.playCount}}">
-            <text class="iconfont icon-play"></text>
-            <text>{{item.playCount }}</text>
+      <!-- 榜单内容 -->
+      <swiper class="hot_top_main" next-margin="50rpx" >
+        <!-- 榜单项 -->
+        <swiper-item class="hot_top_item" wx:for="{{topList}}" wx:key="id" >
+          
+          <view class="top_content">
+            <view class="top_title">
+            <text>{{item.name}}</text> 
+            <text class="iconfont icon-rightarrow"></text> 
           </view>
-        </navigator>
-      </scroll-view>
+          <view class="top_row" wx:for="{{item.tracks}}" wx:key="id" wx:for-item="item2" wx:for-index="topnum" data-parentId="{{item.id}}" data-id="{{item2.id}}" bindtap="toPlay"  >
+            <view class="song_cover">
+              <image  src="{{item2.al.picUrl}}" mode="widthFix" > </image>
+            </view>
+            <view class="song_info_wrap">
+              <view class="song_num">{{topnum}}</view>
+              <view class="song_name">{{item2.name}}</view>
+              <view class="song_singer">-{{item2.ar[0].name}}</view>
+            </view>
+            <view class="hot_icon">
+              <text>new</text>
+            </view>
+          </view>
+          </view>
+        </swiper-item>
+      </swiper>
     </view>
-
-  <!-- 排行榜 -->
-  <view class="hot_top">
-      <!-- 标题 -->
-    <view class="hot_top_title">
-      <view class="hot_title_left">排行榜</view>
-      <view class="hot_title_right">
-        <text class="more">更多</text>
-        <text class="iconfont icon-rightarrow"> </text>
-      </view>
-    </view>
-    <!-- 榜单内容 -->
-    <swiper class="hot_top_main" next-margin="50rpx" >
-      <!-- 榜单项 -->
-      <swiper-item class="hot_top_item" wx:for="{{topList}}" wx:key="id" >
-        
-        <view class="top_content">
-           <view class="top_title">
-          <text>{{item.name}}</text> 
-          <text class="iconfont icon-rightarrow"></text> 
-        </view>
-        <view class="top_row" wx:for="{{item.tracks}}" wx:key="id" wx:for-item="item2" wx:for-index="topnum" data-parentId="{{item.id}}" data-id="{{item2.id}}" bindtap="toPlay"  >
-          <view class="song_cover">
-            <image  src="{{item2.al.picUrl}}" mode="widthFix" > </image>
-          </view>
-          <view class="song_info_wrap">
-            <view class="song_num">{{topnum}}</view>
-            <view class="song_name">{{item2.name}}</view>
-            <view class="song_singer">-{{item2.ar[0].name}}</view>
-          </view>
-          <view class="hot_icon">
-            <text>new</text>
-          </view>
-        </view>
-        </view>
-      </swiper-item>
-    </swiper>
-  </view>
   </scroll-view>
 
 </view>

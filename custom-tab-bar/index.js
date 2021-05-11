@@ -1,5 +1,4 @@
 
-import PubSub from 'pubsub-js'
 var appInst = getApp();
 
 Component({
@@ -33,24 +32,6 @@ Component({
         currentSong,
         isMusicPlay
       })
-      // // 接受一个新的歌曲信息
-      // PubSub.subscribe('currentSong', ((msg, currentSong) => {
-      //   this.setData({
-      //     currentSong
-      //   })
-      //   // 取消订阅
-      //   PubSub.unsubscribe('musicId');
-      // }))
-      // PubSub.subscribe('isMusicPlay', ((msg, isMusicPlay) => {
-      //   console.log('++++++++++', isMusicPlay);
-      //   this.setData({
-      //     isMusicPlay
-      //   })
-      //   console.log(this.data.isMusicPlay);
-      //   // 取消订阅
-      //   PubSub.unsubscribe('isMusicPlay');
-      // }))
-
     }
 
   },
@@ -65,7 +46,12 @@ Component({
     },
     switchPlay() {
       let isMusicPlay = this.data.isMusicPlay
-
+      if(!appInst.globalData.url) {
+        wx.navigateTo({
+          url: '/pages/play_music/index',
+        });
+        return
+      } 
       if (isMusicPlay) {
         this.BackgroundAudioManager.pause()
         isMusicPlay = false
