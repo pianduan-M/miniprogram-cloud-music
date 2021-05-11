@@ -54,6 +54,8 @@ Page({
         showToast({
           title: '网络出错，请重新刷新！'
         })
+        wx.hideLoading();
+        // 关闭下拉刷新
       }
     }, 5000);
   },
