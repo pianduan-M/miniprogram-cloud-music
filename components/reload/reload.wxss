@@ -1,0 +1,112 @@
+@font-face {
+  font-family: "iconfont";
+  /* Project id 2527519 */
+  src: url('//at.alicdn.com/t/font_2527519_abk2io69x8f.woff2?t=1620723184916') format('woff2'), url('//at.alicdn.com/t/font_2527519_abk2io69x8f.woff?t=1620723184916') format('woff'), url('//at.alicdn.com/t/font_2527519_abk2io69x8f.ttf?t=1620723184916') format('truetype');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-shuaxin:before {
+  content: "\e601";
+}
+.icon-delete:before {
+  content: "\e76b";
+}
+.icon-lajixiang:before {
+  content: "\e607";
+}
+.icon-back:before {
+  content: "\e618";
+}
+.icon-one:before {
+  content: "\e63c";
+}
+.icon-guanbi:before {
+  content: "\e600";
+}
+.icon-zanting:before {
+  content: "\e603";
+}
+.icon-bofang1:before {
+  content: "\e645";
+}
+.icon-shangyishou:before {
+  content: "\e61e";
+}
+.icon-bofangliebiao:before {
+  content: "\e616";
+}
+.icon-random:before {
+  content: "\e669";
+}
+.icon-list:before {
+  content: "\e61f";
+}
+.icon-changge:before {
+  content: "\e895";
+}
+.icon-aixin:before {
+  content: "\e623";
+}
+.icon-play1:before {
+  content: "\e6c8";
+}
+.icon-select:before {
+  content: "\e723";
+}
+.icon-xiazai:before {
+  content: "\e856";
+}
+.icon-success:before {
+  content: "\e677";
+}
+.icon-share:before {
+  content: "\e6fb";
+}
+.icon-comment-:before {
+  content: "\e630";
+}
+.icon-successcircle:before {
+  content: "\e602";
+}
+.icon-daoru:before {
+  content: "\e63d";
+}
+.icon-diandiandianshu:before {
+  content: "\e679";
+}
+.icon-jia:before {
+  content: "\e715";
+}
+.icon-huaban:before {
+  content: "\e60d";
+}
+.icon-bofang:before {
+  content: "\e626";
+}
+.icon-xin:before {
+  content: "\e705";
+}
+.icon-play:before {
+  content: "\e6a7";
+}
+.icon-rightarrow:before {
+  content: "\e622";
+}
+.reload {
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  right: 0;
+  bottom: 50vh;
+  background-color: #fff;
+  text-align: center;
+  color: #919191;
+}
+.reload_wrap .iconfont {
+  font-size: 50rpx;
+}

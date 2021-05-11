@@ -1,59 +1,63 @@
 <view class="playlist_detail">
-  <!-- 歌单信息 -->
-  <view class="playlist_detail_info">
-    <view class="info_bg">
-      <image class="img" src="{{recomend[0].al.picUrl}}"></image>
-      <!-- 遮罩层 -->
-      <view class="mask"></view>
-    </view>
-    <view class="date_wrap">
-      <view class="date">
-        <view class="month">{{month}}</view>
-        <view class="line">/</view>
-        <view class="day">{{day}}</view>
+  <view class="playlist_wrap" wx:if="{{recomend.length}}">
+    <!-- 歌单信息 -->
+    <view class="playlist_detail_info">
+      <view class="info_bg">
+        <image class="img" src="{{recomend[0].al.picUrl}}"></image>
+        <!-- 遮罩层 -->
+        <view class="mask"></view>
       </view>
-      <view class="text">
-        <text>查看今日运势</text>
-        <text class="iconfont icon-rightarrow" ></text>
-      </view>
-    </view>
-  </view>
-  <!-- 歌单内容区 -->
-  <view class="playlist_content">
-    <!-- 歌单内容头部区域 -->
-    <view class="playlist_content_head">
-      <view class="head_left">
-        <text class="iconfont icon-play1"></text>
-      </view>
-      <view class="head_center">
+      <view class="date_wrap">
+        <view class="date">
+          <view class="month">{{month}}</view>
+          <view class="line">/</view>
+          <view class="day">{{day}}</view>
+        </view>
         <view class="text">
-          <text>播放全部</text>
+          <text>查看今日运势</text>
+          <text class="iconfont icon-rightarrow"></text>
         </view>
-      </view>
-      <view class="head_right">
-        <text class="iconfont icon-select"></text>
       </view>
     </view>
-    <!-- 歌单列表项 -->
-    <view class="playlist_content_list">
-      <view class="list_item" wx:for="{{recomend}}" wx:key="id" bindtap="toPlay" data-id="{{item.id}}">
-        <!-- 序列 -->
-        <view class="num" style="{{index>=99?'font-size:24rpx':''}}">{{index+1}}</view>
-        <!-- 歌曲信息 -->
-        <view class="song_info">
-          <view class="song_name_wrap">
-            <view class="song_name">{{item.name}}</view>
-            <view class="singer">{{item.ar[0].name}}-{{item.al.name}}</view>
-          </view>
-          <view class="icon" wx:if="{{item.mv !== 0}}">
-            <text class="iconfont icon-bofang"></text>
+    <!-- 歌单内容区 -->
+    <view class="playlist_content">
+      <!-- 歌单内容头部区域 -->
+      <view class="playlist_content_head">
+        <view class="head_left">
+          <text class="iconfont icon-play1"></text>
+        </view>
+        <view class="head_center">
+          <view class="text">
+            <text>播放全部</text>
           </view>
         </view>
-        <!-- 右侧菜单栏 -->
-        <view class="item_menu">
-          <text class="iconfont icon-diandiandianshu"></text>
+        <view class="head_right">
+          <text class="iconfont icon-select"></text>
+        </view>
+      </view>
+      <!-- 歌单列表项 -->
+      <view class="playlist_content_list">
+        <view class="list_item" wx:for="{{recomend}}" wx:key="id" bindtap="toPlay" data-id="{{item.id}}">
+          <!-- 序列 -->
+          <view class="num" style="{{index>=99?'font-size:24rpx':''}}">{{index+1}}</view>
+          <!-- 歌曲信息 -->
+          <view class="song_info">
+            <view class="song_name_wrap">
+              <view class="song_name">{{item.name}}</view>
+              <view class="singer">{{item.ar[0].name}}-{{item.al.name}}</view>
+            </view>
+            <view class="icon" wx:if="{{item.mv !== 0}}">
+              <text class="iconfont icon-bofang"></text>
+            </view>
+          </view>
+          <!-- 右侧菜单栏 -->
+          <view class="item_menu">
+            <text class="iconfont icon-diandiandianshu"></text>
+          </view>
         </view>
       </view>
     </view>
   </view>
+  <!-- 出现错误时的刷新按钮 -->
+  <reload wx:if="{{isError}}" bindtap="reload"></reload>
 </view>

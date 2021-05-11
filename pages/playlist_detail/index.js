@@ -3,7 +3,6 @@ import request from '../../request/index'
 import { showToast } from '../../utils/util'
 var appInst = getApp();
 
-
 Page({
   data: {
     playlist: {},
@@ -19,9 +18,6 @@ Page({
   },
   // 获取歌单详情
   async getPlaylistDetail(id) {
-    this.setData({
-      isError: false
-    })
     // loading
     wx.showLoading({
       title: '加载中',
@@ -62,5 +58,16 @@ Page({
     wx.navigateTo({
       url: '/pages/play_music/index?id=' + id
     });
+  },
+  reload() {
+    // 简单节流
+    if (this.flag) return
+    this.flag = true
+    // 再次发请求
+    this.getRecommendPlaylist()
+
+    setTimeout(() => {
+      this.flag = false
+    }, 1000);
   }
 })

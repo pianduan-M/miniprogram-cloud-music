@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "reload": "../../components/reload/reload"
+  },
   "navigationBarTitleText": "歌单"
 }

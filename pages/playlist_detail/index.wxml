@@ -1,5 +1,5 @@
 <view class="playlist_detail_container" hover-class="none" hover-stop-propagation="false">
-  <view class="playlist_detail" wx:if="{{playlist.tracks.length}}">
+  <view hidder class="playlist_detail" wx:if="{{playlist.tracks.length}}">
     <!-- 歌单信息 -->
     <view class="playlist_detail_info">
       <view class="info_bg">
@@ -112,10 +112,5 @@
       </view>
     </view>
   </view>
-  <view class="reload" wx:if="{{is}}">
-    <view class="reload_wrap">
-      <view class="text">点击刷新</view>
-      <text class="iconfont icon-shuaxin"></text>
-    </view>
-  </view>
+  <reload wx:if="{{isError}}" bindtap="reload" />
 </view>

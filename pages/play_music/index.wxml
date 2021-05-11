@@ -21,7 +21,7 @@
     <view class="song-disc">
       <!-- 磁头 -->
       <view class="needle {{isPlay?'':'song_disc_rotate'}}">
-        <image class="img" src="//s3.music.126.net/mobile-new/img/needle.png?702cf6d" mode="widthFix"></image>
+        <image class="img" src="../../assets/images/needle.png" mode="widthFix"></image>
       </view>
       <view class="song-turn {{isPlay?'cover_rotate':''}}">
         <view class="song-rollwrap">
@@ -37,10 +37,10 @@
     </view>
   </view>
   <!-- 歌词 -->
-  <view style="display:{{!isShowCover?'':'none'}}" class="lyrics_container" bind:touchstart="handleSwichtCoverLrc"  bind:touchend="handleSwichtCoverLrc">
-    <scroll-view class="scrollLyrics" enhanced scroll-y show-scrollbar="{{false}}">
-      <view wx:for="{{lyrics}}" wx:key="index" class="lrc_item {{lrc_id === (index+1) ? 'current':''}}" id="lrc_{{index}}">
-        <view class="lrc">{{item}}</view>
+  <view style="display:{{!isShowCover?'':'none'}}" class="lyrics_container" bind:touchstart="handleSwichtCoverLrc" id="lyrics_container" bind:touchend="handleSwichtCoverLrc">
+    <scroll-view class="scrollLyrics" enhanced scroll-y show-scrollbar="{{false}}" scroll-with-animation>
+      <view wx:for="{{lyrics}}" wx:key="index" class="lrc_item {{lrc_id === index ? 'current':''}}" id="lrc_{{index}}">
+        <view class="lrc">{{item.lyric}}</view>
       </view>
     </scroll-view>
   </view>

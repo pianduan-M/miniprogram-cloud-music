@@ -236,16 +236,3 @@ view.playlist_detail .playlist_content .playlist_content_list .list_item .item_m
   flex-shrink: 0;
   text-align: center;
 }
-.reload {
-  position: absolute;
-  top: 10vh;
-  left: 0;
-  right: 0;
-  bottom: 50vh;
-  background-color: #fff;
-  text-align: center;
-  color: #919191;
-}
-.reload_wrap .iconfont {
-  font-size: 50rpx;
-}

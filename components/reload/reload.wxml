@@ -1,0 +1,6 @@
+<view class="reload">
+  <view class="reload_wrap">
+    <view class="text">点击刷新</view>
+    <text class="iconfont icon-shuaxin"></text>
+  </view>
+</view>

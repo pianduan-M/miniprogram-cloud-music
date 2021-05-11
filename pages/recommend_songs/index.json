@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "歌单"
+  "usingComponents": {
+    "reload": "../../components/reload/reload"
+  },
+  "navigationBarTitleText": "每日推荐"
 }

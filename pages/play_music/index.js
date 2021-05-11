@@ -36,19 +36,21 @@ Page({
     isShowSongList: false,
     playMode: 'list',
     bg_list: ['//s3.music.126.net/mobile-new/img/disc_default.png'],
-    // 记录歌词时间
-    times: [],
     // 歌词
     lyrics: [],
     // 当前歌词id
-    lrc_id: '',
-    isShowCover: true
+    lrc_id: 0,
+    isShowCover: true,
+    // 歌词容器高度
+    lrcWrapheight: 0,
+    lrcheight: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     // 获取背景音乐管理
     this.BackgroundAudioManager = wx.getBackgroundAudioManager();
     const { currentSong, playlist, playMode, isMusicPlay, lyrics, times } = appInst.globalData
@@ -117,26 +119,34 @@ Page({
         appInst.globalData.currentTime = currentTime
 
         if (this.data.isShowCover) return
-        // 匹配歌词
-        const { times, lrc_id } = this.data
-        // 已经是最后一条歌词 就不需要在匹配了
-        if (lrc_id === times.length) return
-        let index = times.findIndex(item => currentTime <= item)
 
+        // 匹配歌词
+        const { lyrics, lrc_id } = this.data
+        if (lyrics.length <= 0) return
+
+        // 找出匹配的歌词的下标
+        let index = lyrics.findIndex((item, index, arr) => currentTime >= item.time && currentTime < arr[index + 1].time)
+        index = index === -1 ? this.data.lrc_id : index
+
+        const that = this
+        // 下标不同才需要设置滚动
         if (index !== lrc_id) {
-          if (lrc_id > 0 && index === -1) {
-            index = times.length
-          }
+          // 获取当前歌词的高度
+          this.query.select('#lrc_' + index).boundingClientRect(function (res) {
+            that.data.lrcheight = res.height
+          })
+          this.query.exec()
+          // 除以容器一半高度 主要是scroll-view组件 滚动到对应元素身上是在最顶部所以需要往后推几位 使当前歌词居中 此方法效果一般 暂时没有找到更好的
+          let lrcCenterIndex = Math.floor(this.data.lrcWrapheight / that.data.lrcheight)
+
           this.setData({
             lrc_id: index
           })
-          if (index < 5) index = 5
+          // 跳转到对应歌词
+          index = index - lrcCenterIndex
+          index = index < 0 ? 0 : index
+          this.lrcScroll.scrollIntoView('#lrc_' + index)
 
-          this.lrcScroll.scrollTo({
-            top: (index - 5) * 42,
-            animated: true,
-            duration: 300
-          })
         }
 
       }
@@ -183,18 +193,26 @@ Page({
         lrc_id: 0
       })
     })
-    // 获取歌词元素实例
-    this.getNode()
+
   },
 
   onReady() {
-    const query = wx.createSelectorQuery().in(this)
-    query.select('.progress_wrap').boundingClientRect(res => {
+    this.query = wx.createSelectorQuery().in(this)
+    this.query.select('.progress_wrap').boundingClientRect(res => {
       this.setData({
         progeress_ele: res
       })
     })
-    query.exec()
+    this.query.exec()
+    // 获取歌词元素实例
+    this.getNode()
+  },
+  onShow() {
+    var animation = wx.createAnimation({
+      duration: 1000,
+      timingFunction: 'linear',
+    })
+    this.animation = animation
   },
   // 播放暂停状态
   changPlayState(isPlay) {
@@ -209,14 +227,13 @@ Page({
   // 上一首 / 下一首
   handleSwicth(e) {
     let { currentIndex, playlist, playMode } = appInst.globalData
-    let { id } = e ? e.currentTarget.dataset : ''
+    let { id } = e.currentTarget || ''
 
     this.BackgroundAudioManager.pause()
 
     this.setData({
       currentTime: 0
     })
-
     id = id ? id : 'next'
     // 列表循环
     if (playMode === 'list' || playMode === 'one') {
@@ -265,7 +282,7 @@ Page({
 
     // 后台获取播放链接
     const res = await request({ url: '/song/url', data: { id, br: 320000 } })
-    if (res.statusCode !== 200) {
+    if (res.data.code !== 200) {
       showToast({
         title: '播放错误请重试！'
       })
@@ -281,9 +298,17 @@ Page({
       this.handleSwicth()
       return
     }
-
+    // 请求歌词
     const lyric = await request({ url: '/lyric', data: { id: id } })
-    this.parseLyric(lyric.data.lrc.lyric)
+    // 判断当前歌曲是否有歌词 没有的话清空上一首的
+    if (lyric.data.lrc) {
+      this.parseLyric(lyric.data.lrc.lyric)
+    } else {
+      this.setData({
+        lyrics: [],
+        times: []
+      })
+    }
 
     this.BackgroundAudioManager.src = url
     this.BackgroundAudioManager.title = currentSong.name
@@ -292,7 +317,9 @@ Page({
       currentSong,
       bg_list,
       currentIndex,
-      isPlay: true
+      isPlay: true,
+      lrcWrapheight: 0,
+      lrcheight: 0
     })
     wx.setStorageSync('currentSong', currentSong);
     // 保存到全局变量
@@ -449,45 +476,45 @@ Page({
     });
   },
   // 解析歌词
-  parseLyric(data) {
-    // 一定要清空上一首歌曲的歌词和时间
-    const times = [];
+  parseLyric(text) {
     const lyrics = [];
-    var array = data.split("\n");
-    // console.log(array);
-    // [00:00.92]
-    var timeReg = /\[(\d*:\d*\.\d*)\]/
-    // 遍历取出每一条歌词
-    array.forEach(ele => {
-      // 处理歌词
-      var lrc = ele.split("]");
-      // 排除空字符串(没有歌词的)
-      if (!lrc) return;
-      if (ele.indexOf('][') !== -1) {
-        lyrics.push(lrc[2]);
-        // array.push(lrc[0] + ']' + lrc[2])
-        ele = lrc[1] + ']'
-      } else {
-        lyrics.push(lrc[1]);
-      }
+    let lrcArr = text.split("\n")
+    let timeReg = /\[(\d*:\d*\.\d*)\]/g
+    lrcArr.forEach(lrc => {
+      // 用正则匹配时间
+      let _times = lrc.match(timeReg)
+      // 歌词
+      let lyric = lrc.replace(timeReg, '').trim()
+      // 过滤掉非歌词部分
+      if (_times !== null && lyric) {
+        _times.forEach(item => {
+          const min = Number(String(item.match(/\[\d{2}/i)).slice(1));
+          const sec = parseFloat(String(item.match(/\d{2}\.\d{2}/i)));
+          //换算时间，保留两位小数
+          var time = Math.round((min * 60 + sec) * 100) / 100;
+          //把时间和对应的歌词保存到数组
+          lyrics.push({
+            time,
+            lyric
+          })
+        })
 
-      // 处理时间
-      var res = timeReg.exec(ele);
-      if (res == null) return true;
-      var timeStr = res[1]; // 00:00.92
-      var res2 = timeStr.split(":");
-      var min = parseInt(res2[0]) * 60;
-      var sec = parseFloat(res2[1]);
-      var time = parseFloat(Number(min + sec).toFixed(2));
-      times.push(time);
+      }
     });
+    //重新按时间排序
+    lyrics.sort(function (a, b) {
+      return a.time - b.time;
+    });
+    // 最后添加一个最大的数 用于歌词比较
+    lyrics.push({
+      time: Number.MAX_SAFE_INTEGER,
+    })
+
+
     this.setData({
-      times,
       lyrics
     })
-    appInst.globalData.times = times
     appInst.globalData.lyrics = lyrics
-    wx.setStorageSync('times', times);
     wx.setStorageSync('lyrics', lyrics);
   },
   // 切换 歌词 / 封面
@@ -507,9 +534,18 @@ Page({
   // 获取node实例
   getNode() {
     const that = this
-    wx.createSelectorQuery().select('.scrollLyrics').node(function (res) {
-      that.lrcScroll = res.node // 节点对应的 Canvas 实例。
+    // 滚动的节点
+    this.query.select('.scrollLyrics').node(function (res) {
+      that.lrcScroll = res.node
       that.lrcScroll.showScrollbar = false
-    }).exec()
-  }
+    })
+    // 容器节点 高度
+    this.query.select('#lyrics_container').boundingClientRect(function (res) {
+      const lrcWrapheight = res.height / 2
+      that.setData({
+        lrcWrapheight
+      })
+    })
+    this.query.exec()
+  },
 })
