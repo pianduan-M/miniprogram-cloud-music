@@ -1,6 +1,6 @@
 <!-- miniprogram/custom-tab-bar/index.wxml -->
 <view class="tab-bar">
-  <navigator class="tab-bar-tools" url="/pages/play_music/index" hover-class="none" open-type="navigate" wx:if="{{currentSong.name}}">
+  <navigator hidden class="tab-bar-tools" url="/pages/play_music/index" hover-class="none" open-type="navigate" wx:if="{{currentSong.name}}">
     <!-- 封面 -->
     <view class="tabbar_song_cover">
       <div class="song_cover_wrap">

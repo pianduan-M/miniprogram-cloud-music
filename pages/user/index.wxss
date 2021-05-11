@@ -2,14 +2,13 @@
   width: 100vw;
   height: 100vh;
   background-color: #f6f6f6;
-  padding-bottom: 180rpx;
+  padding-bottom: 160rpx;
   overflow: hidden;
   box-sizing: border-box;
 }
 .user_container .user_wrap {
-  width: 100vw;
-  height: 100vh;
   padding: 30rpx;
+  margin-bottom: 100rpx;
 }
 .user_container .user_info {
   padding: 20rpx 0;

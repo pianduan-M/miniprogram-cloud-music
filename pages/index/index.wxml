@@ -8,7 +8,8 @@
   </view>
   <!-- 内容区 -->
   <scroll-view class="home_content" refresher-enabled  scroll-y  bindrefresherrefresh="handleResherrefresh" refresher-triggered="{{isTriggered}}" >
-    <!-- 轮播图 -->
+   <view class="home_content_wrap">
+      <!-- 轮播图 -->
     <swiper class="banner" wx:if="{{bannerList.length>0}}" indicator-active-color="#f64649" autoplay indicator-dots circular>
       <swiper-item class="banner_item" wx:for="{{bannerList}}" wx:key="targetId">
         <image src="{{item.imageUrl}}" mode="widthFix">
@@ -84,6 +85,10 @@
         </swiper-item>
       </swiper>
     </view>
+   </view>
+   <!-- 底部导航条占位 -->
+   <view style="padding-bottom:100rpx; background:#fff">
+   </view>
   </scroll-view>
 
 </view>

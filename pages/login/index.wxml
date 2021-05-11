@@ -5,7 +5,7 @@
     <view>{{type==='id' ? '' : '未注册手机号码登录后将自动创建账号'}}</view>
   </view>
   <!-- 切换手机/邮箱登录 -->
-  <view class="login_tab">
+  <view class="login_tab" bindtap="handleLoginType">
     <view class="tab_item {{type==='id'? 'active' :'' }}">
       <text id="id">账号登录</text>
     </view>

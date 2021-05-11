@@ -57,6 +57,7 @@ Page({
     if (!options.id) {
       const { bg_list } = this.data
       bg_list.push(currentSong.al.picUrl)
+
       this.setData({
         currentSong,
         playlist,
@@ -103,16 +104,12 @@ Page({
       // 如果手动滑动进度 直接返回
       if (!this.data.isMove) {
         let currentTime = this.BackgroundAudioManager.currentTime
+        const duration = this.BackgroundAudioManager.duration
 
-        if (currentTime < this.data.currentTime) {
-          currentTime = this.data.currentTime
-        }
         // 设置进度条
         this.setProgress(currentTime)
 
         if (!this.data.duration) {
-          const duration = this.BackgroundAudioManager.duration
-
           this.setData({
             duration
           })
@@ -214,6 +211,12 @@ Page({
     let { currentIndex, playlist, playMode } = appInst.globalData
     let { id } = e ? e.currentTarget.dataset : ''
 
+    this.BackgroundAudioManager.pause()
+
+    this.setData({
+      currentTime: 0
+    })
+
     id = id ? id : 'next'
     // 列表循环
     if (playMode === 'list' || playMode === 'one') {
@@ -232,11 +235,11 @@ Page({
     currentIndex = currentIndex >= playlist.length ? 0 : currentIndex
     const songId = playlist[currentIndex].id
     appInst.globalData.currentIndex = currentIndex
+
     this.setSongSrc(songId)
   },
   // 根据索引设置歌曲链接
   async setSongSrc(id) {
-
     let { playlist, bg_list } = this.data
     // 读取当前id 在播放列表中的索引 读取当前歌曲信息
 
@@ -246,14 +249,28 @@ Page({
     if (!currentSong || !currentSong.al) {
       const res = await request({ url: '/song/detail', data: { ids: id } })
       currentSong = res.data.songs[0]
+
+      if (res.statusCode !== 200) {
+        showToast({
+          title: '播放错误请重试！'
+        })
+        return
+      }
     }
 
     // 背景图片 
     if (bg_list.length <= 2) {
       bg_list.push(currentSong.al.picUrl)
     }
+
     // 后台获取播放链接
     const res = await request({ url: '/song/url', data: { id, br: 320000 } })
+    if (res.statusCode !== 200) {
+      showToast({
+        title: '播放错误请重试！'
+      })
+      return
+    }
     const { url } = res.data.data[0] || ""
 
     // 如果当前歌曲播放不了 直接下一首
@@ -441,7 +458,6 @@ Page({
     // [00:00.92]
     var timeReg = /\[(\d*:\d*\.\d*)\]/
     // 遍历取出每一条歌词
-    console.log(array);
     array.forEach(ele => {
       // 处理歌词
       var lrc = ele.split("]");

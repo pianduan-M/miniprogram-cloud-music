@@ -3,7 +3,6 @@ App({
   onLaunch() {
     this.BackgroundAudioManager = wx.getBackgroundAudioManager()
     this.globalData.currentSong = wx.getStorageSync('currentSong');
-    this.globalData.url = wx.getStorageSync('url');
     this.globalData.playlist = wx.getStorageSync('playlist');
     this.globalData.playMode = wx.getStorageSync('playMode') || 'list';
     this.globalData.currentIndex = wx.getStorageSync('currentIndex') || 0

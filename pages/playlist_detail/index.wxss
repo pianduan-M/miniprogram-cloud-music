@@ -208,7 +208,7 @@ view.playlist_detail .playlist_content .playlist_content_list .list_item .song_i
 }
 view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .song_name_wrap .song_name {
   width: 100%;
-  font-size: 28rpx;
+  font-size: 32rpx;
   color: rgba(0, 0, 0, 0.8);
   overflow: hidden;
   white-space: nowrap;
@@ -235,4 +235,17 @@ view.playlist_detail .playlist_content .playlist_content_list .list_item .item_m
   width: 80rpx;
   flex-shrink: 0;
   text-align: center;
+}
+.reload {
+  position: absolute;
+  top: 10vh;
+  left: 0;
+  right: 0;
+  bottom: 50vh;
+  background-color: #fff;
+  text-align: center;
+  color: #919191;
+}
+.reload_wrap .iconfont {
+  font-size: 50rpx;
 }

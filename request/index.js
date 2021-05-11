@@ -1,5 +1,5 @@
 
-const bese_url = 'http://192.168.6.58:5000'
+const bese_url = 'http://192.168.1.14:5000'
 
 export default function request(params) {
 

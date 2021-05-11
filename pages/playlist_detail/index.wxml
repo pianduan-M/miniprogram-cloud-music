@@ -1,17 +1,18 @@
-<view class="playlist_detail">
-  <!-- 歌单信息 -->
-  <view class="playlist_detail_info">
-    <view class="info_bg">
-      <image src="{{playlist.coverImgUrl}}" mode="widthFix"></image>
-      <!-- 遮罩层 -->
-      <view></view>
-    </view>
-    <!-- 信息左侧内容 -->
-    <view class="playlist_detail_left">
-      <image src="{{playlist.coverImgUrl}}" mode="widthFix"></image>
-      <view class="play_count">
-        <text class="iconfont icon-play"></text>
-        <wxs module="format">
+<view class="playlist_detail_container" hover-class="none" hover-stop-propagation="false">
+  <view class="playlist_detail" wx:if="{{playlist.tracks.length}}">
+    <!-- 歌单信息 -->
+    <view class="playlist_detail_info">
+      <view class="info_bg">
+        <image src="{{playlist.coverImgUrl}}" mode="widthFix"></image>
+        <!-- 遮罩层 -->
+        <view></view>
+      </view>
+      <!-- 信息左侧内容 -->
+      <view class="playlist_detail_left">
+        <image src="{{playlist.coverImgUrl}}" mode="widthFix"></image>
+        <view class="play_count">
+          <text class="iconfont icon-play"></text>
+          <wxs module="format">
           module.exports.formatNum = function(num) {
             if (num >= 100000000) {
                 return Math.round(num / 10000000) / 10 + '亿'
@@ -23,91 +24,98 @@
             
           }
         </wxs>
-        <text>{{format.formatNum(playlist.playCount)}}</text>
+          <text>{{format.formatNum(playlist.playCount)}}</text>
+        </view>
+      </view>
+      <!-- 信息右侧内容 -->
+      <view class="playlist_detail_right">
+        <!-- 歌单名字 -->
+        <view class="playlist_detail_name">
+          <view class="playlist_name">{{playlist.name}}</view>
+          <!-- 歌单创建者信息 -->
+          <view class="user_info">
+            <!-- 头像 -->
+            <view class="user_avatar">
+              <image src="{{playlist.creator.avatarUrl}}" mode="widthFix"></image>
+            </view>
+            <!-- 昵称 -->
+            <view class="user_name">
+              <text>{{playlist.creator.nickname}}</text>
+              <text class="iconfont icon-rightarrow"></text>
+            </view>
+          </view>
+        </view>
+        <!-- 歌单信息 -->
+        <navigator class="playlist_desc">
+          <text class="desc">{{playlist.description?playlist.description:'编辑信息'}}</text>
+          <text class="iconfont icon-rightarrow"></text>
+        </navigator>
       </view>
     </view>
-    <!-- 信息右侧内容 -->
-    <view class="playlist_detail_right">
-      <!-- 歌单名字 -->
-      <view class="playlist_detail_name">
-        <view class="playlist_name">{{playlist.name}}</view>
-        <!-- 歌单创建者信息 -->
-        <view class="user_info">
-          <!-- 头像 -->
-          <view class="user_avatar">
-            <image src="{{playlist.creator.avatarUrl}}" mode="widthFix"></image>
+    <!-- 中间工具栏 -->
+    <view class="playlist_tool">
+      <view class="tool_wrap">
+        <button class="tool_item">
+          <text class="iconfont icon-success"></text>
+          <text>{{playlist.subscribedCount>0?playlist.subscribedCount:'收藏'}}</text>
+        </button>
+        <button class="tool_item">
+          <text class="iconfont icon-comment-"></text>
+          <text>{{playlist.commentCount>0?playlist.commentCount:"评论"}}</text>
+        </button>
+        <button class="tool_item">
+          <text class="iconfont icon-share"></text>
+          <text>{{playlist.shareCount>0?playlist.shareCount:"分享"}}</text>
+        </button>
+      </view>
+    </view>
+    <!-- 歌单内容区 -->
+    <view class="playlist_content">
+      <!-- 歌单内容头部区域 -->
+      <view class="playlist_content_head">
+        <view class="head_left">
+          <text class="iconfont icon-play1"></text>
+        </view>
+        <view class="head_center">
+          <view class="text">
+            <text>播放全部</text>
+            <text class="num">({{playlist.tracks.length}})</text>
           </view>
-          <!-- 昵称 -->
-          <view class="user_name">
-            <text>{{playlist.creator.nickname}}</text>
-            <text class="iconfont icon-rightarrow"></text>
+          <view class="icon">
+            <text class="iconfont icon-xiazai"></text>
+          </view>
+        </view>
+        <view class="head_right">
+          <text class="iconfont icon-select"></text>
+        </view>
+      </view>
+      <!-- 歌单列表项 -->
+      <view class="playlist_content_list">
+        <view class="list_item" wx:for="{{playlist.tracks}}" wx:key="id" bindtap="toPlay" data-id="{{item.id}}">
+          <!-- 序列 -->
+          <view class="num" style="{{index>=99?'font-size:24rpx':''}}">{{index+1}}</view>
+          <!-- 歌曲信息 -->
+          <view class="song_info">
+            <view class="song_name_wrap">
+              <view class="song_name">{{item.name}}</view>
+              <view class="singer">{{item.ar[0].name}}-{{item.al.name}}</view>
+            </view>
+            <view class="icon" wx:if="{{item.mv !== 0}}">
+              <text class="iconfont icon-bofang"></text>
+            </view>
+          </view>
+          <!-- 右侧菜单栏 -->
+          <view class="item_menu">
+            <text class="iconfont icon-diandiandianshu"></text>
           </view>
         </view>
       </view>
-      <!-- 歌单信息 -->
-      <navigator class="playlist_desc">
-        <text class="desc">{{playlist.description?playlist.description:'编辑信息'}}</text>
-        <text class="iconfont icon-rightarrow"></text>
-      </navigator>
     </view>
   </view>
-  <!-- 中间工具栏 -->
-  <view class="playlist_tool">
-    <view class="tool_wrap">
-      <button class="tool_item">
-        <text class="iconfont icon-success"></text>
-        <text>{{playlist.subscribedCount>0?playlist.subscribedCount:'收藏'}}</text>
-      </button>
-      <button class="tool_item">
-        <text class="iconfont icon-comment-"></text>
-        <text>{{playlist.commentCount>0?playlist.commentCount:"评论"}}</text>
-      </button>
-      <button class="tool_item">
-        <text class="iconfont icon-share"></text>
-        <text>{{playlist.shareCount>0?playlist.shareCount:"分享"}}</text>
-      </button>
-    </view>
-  </view>
-  <!-- 歌单内容区 -->
-  <view class="playlist_content">
-    <!-- 歌单内容头部区域 -->
-    <view class="playlist_content_head">
-      <view class="head_left">
-        <text class="iconfont icon-play1"></text>
-      </view>
-      <view class="head_center">
-        <view class="text">
-          <text>播放全部</text>
-          <text class="num">({{playlist.tracks.length}})</text>
-        </view>
-        <view class="icon">
-          <text class="iconfont icon-xiazai"></text>
-        </view>
-      </view>
-      <view class="head_right">
-        <text class="iconfont icon-select"></text>
-      </view>
-    </view>
-    <!-- 歌单列表项 -->
-    <view class="playlist_content_list">
-      <view class="list_item" wx:for="{{playlist.tracks}}" wx:key="id" bindtap="toPlay" data-id="{{item.id}}">
-        <!-- 序列 -->
-        <view class="num" style="{{index>=99?'font-size:24rpx':''}}">{{index+1}}</view>
-        <!-- 歌曲信息 -->
-        <view class="song_info">
-          <view class="song_name_wrap">
-            <view class="song_name">{{item.name}}</view>
-            <view class="singer">{{item.ar[0].name}}-{{item.al.name}}</view>
-          </view>
-          <view class="icon" wx:if="{{item.mv !== 0}}">
-            <text class="iconfont icon-bofang"></text>
-          </view>
-        </view>
-        <!-- 右侧菜单栏 -->
-        <view class="item_menu">
-          <text class="iconfont icon-diandiandianshu"></text>
-        </view>
-      </view>
+  <view class="reload" wx:if="{{is}}">
+    <view class="reload_wrap">
+      <view class="text">点击刷新</view>
+      <text class="iconfont icon-shuaxin"></text>
     </view>
   </view>
 </view>

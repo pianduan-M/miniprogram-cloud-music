@@ -161,6 +161,7 @@
 .home .hot_top {
   margin-bottom: 20rpx;
   background-color: #fff;
+  border-radius: 20rpx;
 }
 .home .hot_top .hot_top_title {
   display: flex;
