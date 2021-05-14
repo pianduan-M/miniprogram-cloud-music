@@ -58,6 +58,23 @@
 .song_list_container .song_list_content .song_list_item .song_name_wrap .isCurrent {
   color: var(--themeColor) !important;
 }
+.song_list_container .song_list_content .song_list_item .song_name_wrap .tag {
+  position: relative;
+  font-size: 20rpx;
+  color: var(--themeColor);
+  margin-right: 5rpx;
+  padding: 5rpx;
+}
+.song_list_container .song_list_content .song_list_item .song_name_wrap .tag::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(249, 71, 71, 0.3);
+  border-radius: 10rpx;
+}
 .song_list_container .song_list_content .song_list_item .song_name_wrap .song_name {
   font-size: 30rpx;
   color: rgba(0, 0, 0, 0.8);

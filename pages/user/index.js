@@ -211,9 +211,10 @@ Page({
       success: async (result) => {
         if (result.confirm) {
           // 退出登录
-          await request({url:'/logout'})
+          await request({ url: '/logout' })
           // 清除缓存
           wx.clearStorageSync();
+          appInst.globalData.userInfo = {}
           // 跳转页面
           wx.reLaunch({
             url: '/pages/user/index'

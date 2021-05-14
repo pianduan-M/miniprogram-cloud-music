@@ -270,8 +270,14 @@ view.playlist_detail {
               text-overflow: ellipsis;
             }
 
+            .singer_wrap {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+
             .singer {
-              display: block;
+              // display: block;
               width: 100%;
               font-weight: 300;
               font-size: 24rpx;
@@ -279,6 +285,27 @@ view.playlist_detail {
               overflow: hidden;
               white-space: nowrap;
               text-overflow: ellipsis;
+            }
+
+            .tag {
+              position: relative;
+              font-size: 20rpx;
+              color: var(--themeColor);
+              margin-right: 5rpx;
+              padding: 5rpx;
+    
+
+              &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                border: 1px solid rgba(249, 71, 71, 0.3);
+                border-radius: 10rpx;
+                // transform: scale(1.3);
+              }
             }
 
           }
@@ -304,5 +331,5 @@ view.playlist_detail {
     }
   }
 
- 
+
 }

@@ -91,12 +91,11 @@
   z-index: 5;
   width: 168rpx;
   height: 244rpx;
-  transform-origin: 40rpx 0rpx;
+  transform-origin: 30rpx 10rpx;
   transform: translateX(-10%) rotate(-6deg);
   transition: 1s transform;
 }
 .play_music .play_cover_wrap .song-disc .song_disc_rotate {
-  transform-origin: 40rpx 0rpx;
   transform: translateX(-10%) rotate(-30deg);
 }
 .play_music .play_cover_wrap .song-disc .song-turn {

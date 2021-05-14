@@ -104,15 +104,18 @@ view.playlist_detail .playlist_content .playlist_content_list .list_item {
   padding: 10rpx 0;
   display: flex;
   align-items: center;
+  padding-left: 30rpx;
 }
-view.playlist_detail .playlist_content .playlist_content_list .list_item .num {
-  width: 80rpx;
+view.playlist_detail .playlist_content .playlist_content_list .list_item .cover {
+  width: 100rpx;
+  height: 100rpx;
+  overflow: hidden;
   flex-shrink: 0;
-  text-align: center;
-  color: #919191;
+  border-radius: 20rpx;
+  margin-right: 20rpx;
 }
-view.playlist_detail .playlist_content .playlist_content_list .list_item .num .iconfont {
-  color: var(--themeColor);
+view.playlist_detail .playlist_content .playlist_content_list .list_item .cover .img {
+  width: 100%;
 }
 view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info {
   width: 100%;
@@ -133,8 +136,29 @@ view.playlist_detail .playlist_content .playlist_content_list .list_item .song_i
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .song_name_wrap .tag {
+  position: relative;
+  font-size: 20rpx;
+  color: var(--themeColor);
+  margin-right: 5rpx;
+  padding: 5rpx;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .song_name_wrap .tag::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(249, 71, 71, 0.3);
+  border-radius: 10rpx;
+}
+view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .song_name_wrap .singer_wrap {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 view.playlist_detail .playlist_content .playlist_content_list .list_item .song_info .song_name_wrap .singer {
-  display: block;
   width: 100%;
   font-weight: 300;
   font-size: 24rpx;

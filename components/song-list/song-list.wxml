@@ -10,7 +10,10 @@
     <scroll-view class="song_list_content" scroll-y enhanced scroll-into-view="{{'song_'+currentIndex}}">
       <view class="song_list_item " wx:for="{{playlist}}" wx:key="id" id="{{'song_'+index}}" bindtap="playListSong" data-id="{{item.id}}">
         <view class="song_name_wrap ">
-          <view class="song_name {{index===currentIndex?'isCurrent':''}}">{{item.name}}</view>
+          <view class="song_name {{index===currentIndex?'isCurrent':''}}">
+            <text class="tag" wx:if="{{item.fee == 1 }}">VIP</text>
+            {{item.name}}
+          </view>
           <text class="{{index===currentIndex?'isCurrent':''}}">-</text>
           <view class="singer {{index===currentIndex?'isCurrent':''}}">{{item.ar[0].name}}</view>
         </view>

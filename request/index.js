@@ -1,5 +1,5 @@
 
-const bese_url = 'http://192.168.1.14:5000'
+const bese_url = 'http://freehome.top:3000'
 
 export default function request(params) {
 

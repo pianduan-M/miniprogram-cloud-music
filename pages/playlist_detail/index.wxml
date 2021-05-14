@@ -91,14 +91,18 @@
       </view>
       <!-- 歌单列表项 -->
       <view class="playlist_content_list">
-        <view class="list_item" wx:for="{{playlist.tracks}}" wx:key="id" bindtap="toPlay" data-id="{{item.id}}">
+        <view class="list_item" wx:for="{{playlist.tracks}}" wx:key="id" bindtap="toPlay" data-fee="{{item.fee}}" data-id="{{item.id}}">
           <!-- 序列 -->
           <view class="num" style="{{index>=99?'font-size:24rpx':''}}">{{index+1}}</view>
           <!-- 歌曲信息 -->
           <view class="song_info">
             <view class="song_name_wrap">
               <view class="song_name">{{item.name}}</view>
-              <view class="singer">{{item.ar[0].name}}-{{item.al.name}}</view>
+              <view class="singer_wrap">
+                <text class="tag" wx:if="{{item.fee == '1'}}" >VIP</text>
+                <text class="tag" wx:if="{{item.privilege.maxbr === 999000}}">SQ</text>
+                <text class="singer">{{item.ar[0].name}}-{{item.al.name}}</text>
+              </view>
             </view>
             <view class="icon" wx:if="{{item.mv !== 0}}">
               <text class="iconfont icon-bofang"></text>

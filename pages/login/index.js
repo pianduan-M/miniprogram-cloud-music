@@ -240,8 +240,6 @@ Page({
         showToast({ title: '登录成功！' })
         break;
     }
-    console.log(result);
-
     if (code === 200) {
       // 清除获取验证码按钮倒计时
       this.intervalId && clearInterval(this.intervalId)

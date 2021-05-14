@@ -280,6 +280,18 @@ Page({
       bg_list.push(currentSong.al.picUrl)
     }
 
+    if (currentSong.fee === 1) {
+      console.log('++++++++++++++');
+      return
+    }
+    this.setData({
+      currentSong,
+      bg_list,
+      currentIndex,
+      lrcWrapheight: 0,
+      lrcheight: 0,
+      lrc_id: 0
+    })
     // 后台获取播放链接
     const res = await request({ url: '/song/url', data: { id, br: 320000 } })
     if (res.data.code !== 200) {
@@ -313,14 +325,7 @@ Page({
     this.BackgroundAudioManager.src = url
     this.BackgroundAudioManager.title = currentSong.name
 
-    this.setData({
-      currentSong,
-      bg_list,
-      currentIndex,
-      isPlay: true,
-      lrcWrapheight: 0,
-      lrcheight: 0
-    })
+
     wx.setStorageSync('currentSong', currentSong);
     // 保存到全局变量
     appInst.globalData.currentSong = currentSong
@@ -371,10 +376,12 @@ Page({
 
     if (e.type == 'touchend') {
       this.BackgroundAudioManager.seek(currentTime)
+      this.BackgroundAudioManager.play()
       // 开启自动进度条
       this.setData({
         isMove: false
       })
+
     }
   },
   // 播放暂停按钮点击

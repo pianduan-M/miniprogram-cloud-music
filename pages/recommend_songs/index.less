@@ -20,10 +20,12 @@ view.playlist_detail {
       width: 100%;
       height: 100%;
       transform: scale(1.5);
+
       .img {
         width: 100%;
         height: 80%;
       }
+
       .mask {
         position: absolute;
         left: 0;
@@ -33,6 +35,7 @@ view.playlist_detail {
         background-color: rgba(0, 0, 0, 0.2);
       }
     }
+
     // 标题
     .date_wrap {
       position: absolute;
@@ -40,15 +43,18 @@ view.playlist_detail {
       left: 30rpx;
       color: #fff;
       font-weight: 700;
+
       .date {
         display: flex;
         align-items: flex-end;
+
         .month {
           font-size: 60rpx;
           transform: translateY(13%);
           // letter-spacing: -5rpx;
           // margin-left: -5rpx;
         }
+
         .line {
           font-weight: 300;
           margin-left: 16rpx;
@@ -61,6 +67,7 @@ view.playlist_detail {
         font-size: 24rpx;
         display: flex;
         align-items: center;
+
         .iconfont {
           font-size: 26rpx;
           margin-left: 5rpx;
@@ -100,6 +107,8 @@ view.playlist_detail {
           margin-left: 10rpx;
         }
 
+
+
         .icon {
           width: 50rpx;
           flex-shrink: 0;
@@ -124,17 +133,18 @@ view.playlist_detail {
         padding: 10rpx 0;
         display: flex;
         align-items: center;
-
-        // 左侧序列
-        .num {
-          width: 80rpx;
+        padding-left: 30rpx;
+        // 左侧封面
+        .cover {
+          width: 100rpx;
+          height: 100rpx;
+          overflow: hidden;
           flex-shrink: 0;
-          text-align: center;
-          color: #919191;
-
-          .iconfont {
-            color: var(--themeColor);
-          }
+          border-radius: 20rpx;
+          margin-right: 20rpx;
+         .img {
+           width: 100%;
+         }
         }
 
         // 中间歌曲信息
@@ -158,9 +168,35 @@ view.playlist_detail {
               white-space: nowrap;
               text-overflow: ellipsis;
             }
+            // vip 标识
+            .tag {
+              position: relative;
+              font-size: 20rpx;
+              color: var(--themeColor);
+              margin-right: 5rpx;
+              padding: 5rpx;
+    
+
+              &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                border: 1px solid rgba(249, 71, 71, 0.3);
+                border-radius: 10rpx;
+                // transform: scale(1.3);
+              }
+            }
+
+            .singer_wrap {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
 
             .singer {
-              display: block;
               width: 100%;
               font-weight: 300;
               font-size: 24rpx;
