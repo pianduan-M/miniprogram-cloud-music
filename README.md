@@ -26,13 +26,13 @@ GitHub网易云音乐接口开源项目 [Binaryify/NeteaseCloudMusicApi](https:/
 
 #### 登录页面
 
-<img src="https://i.im5i.com/2021/05/20/CHAtO.jpg" alt="Screenshot 20210520 111613 WeChat" border="0">
+<img src="https://i.im5i.com/2021/05/20/CHAtO.jpg" alt="Screenshot 20210520 111613 WeChat" border="0" width="33%">
 
 
 
 #### 首页
 
-<img src="https://i.im5i.com/2021/05/20/CHzwd.jpg" alt="Screenshot 20210520 111657 WeChat" border="0">
+<img src="https://i.im5i.com/2021/05/20/CHzwd.jpg" alt="Screenshot 20210520 111657 WeChat" border="0"  width="33%">
 
 
 
@@ -40,7 +40,7 @@ GitHub网易云音乐接口开源项目 [Binaryify/NeteaseCloudMusicApi](https:/
 
 #### 每日推荐
 
-<img src="https://i.im5i.com/2021/05/20/CH0J4.jpg" alt="Screenshot 20210520 111702 WeChat" border="0">
+<img src="https://i.im5i.com/2021/05/20/CH0J4.jpg" alt="Screenshot 20210520 111702 WeChat" border="0"  width="33%">
 
 
 
@@ -48,7 +48,7 @@ GitHub网易云音乐接口开源项目 [Binaryify/NeteaseCloudMusicApi](https:/
 
 #### 歌单页面
 
-<img src="https://i.im5i.com/2021/05/20/CHDoW.jpg" alt="Screenshot 20210520 111710 WeChat" border="0">
+<img src="https://i.im5i.com/2021/05/20/CHDoW.jpg" alt="Screenshot 20210520 111710 WeChat" border="0" width="33%">
 
 
 
@@ -58,7 +58,7 @@ GitHub网易云音乐接口开源项目 [Binaryify/NeteaseCloudMusicApi](https:/
 
 #### 搜索页
 
-<img src="https://i.im5i.com/2021/05/20/CHaOG.jpg" alt="Screenshot 20210520 111715 WeChat" border="0">
+<img src="https://i.im5i.com/2021/05/20/CHaOG.jpg" alt="Screenshot 20210520 111715 WeChat" border="0" width="33%">
 
 
 
@@ -70,7 +70,7 @@ GitHub网易云音乐接口开源项目 [Binaryify/NeteaseCloudMusicApi](https:/
 
 #### 个人中心
 
-<img src="https://i.im5i.com/2021/05/20/CHMD6.jpg" alt="Screenshot 20210520 111758 WeChat" border="0">
+<img src="https://i.im5i.com/2021/05/20/CHMD6.jpg" alt="Screenshot 20210520 111758 WeChat" border="0" width="33%">
 
 
 
@@ -80,10 +80,10 @@ GitHub网易云音乐接口开源项目 [Binaryify/NeteaseCloudMusicApi](https:/
 
 #### 播放页面
 
-<img src="https://i.im5i.com/2021/05/20/CHkS8.jpg" alt="Screenshot 20210520 111821 WeChat" border="0">
+<img src="https://i.im5i.com/2021/05/20/CHkS8.jpg" alt="Screenshot 20210520 111821 WeChat" border="0"  width="33%">
 
 
 
 #### 歌词
 
-<img src="https://i.im5i.com/2021/05/20/CjF8w.jpg" alt="Screenshot 20210520 111847 WeChat" border="0">
+<img src="https://i.im5i.com/2021/05/20/CjF8w.jpg" alt="Screenshot 20210520 111847 WeChat" border="0"  width="33%">
