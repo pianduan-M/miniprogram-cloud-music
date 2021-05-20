@@ -64,7 +64,7 @@ GitHub网易云音乐接口开源项目 [Binaryify/NeteaseCloudMusicApi](https:/
 
 #### 搜索结果
 
-<img src="https://i.im5i.com/2021/05/20/CjC31.png">
+<img src="https://i.im5i.com/2021/05/20/CjC31.png" width="80%">
 
 
 
